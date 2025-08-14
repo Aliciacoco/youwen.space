@@ -1,9 +1,16 @@
+
+
 body {
     margin: 80px;
     /* 整个页面四周留 20px 空白 */
     /* 或者用 padding: 20px; 让内容和浏览器边框之间留空 */
 }
-
+@media (max-width: 600px) {
+    body {
+        margin: 30px;
+        /* 手机端的 margin 变小 */
+    }
+}
 
 
 /* 覆盖层与控件 */
@@ -68,7 +75,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    /* border: 1px solid #e5e5e5; */
+    
 }
 
 .img-row img {
@@ -76,4 +83,5 @@ body {
     height: auto;
     border-radius: 8px;
     cursor: zoom-in;
+    border: 1px solid #e5e5e5; 
 }
