@@ -1,3 +1,20 @@
+@import url("css/img-row.css");
+@import url("css/tab.css");
+@font-face {
+    font-family: 'TsangerJinKai';
+    src: url('fonts/仓耳今楷03-W03.ttf') format('truetype');
+    font-weight: 300;
+    /* 细 */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TsangerJinKai';
+    src: url('fonts/仓耳今楷03-W04.ttf') format('truetype');
+    font-weight: 400;
+    /* 粗 */
+    font-style: normal;
+}
 
 
 body {
@@ -12,76 +29,42 @@ body {
     }
 }
 
-
-/* 覆盖层与控件 */
-.lb {
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, .86);
-    z-index: 9999;
+:root {
+    --bg: #FAF9F6;
+    /* 米白 */
+    --text: #333333;
+    /* 深灰 */
 }
 
-.lb.open {
-    display: flex;
+html,
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'TsangerJinKai', sans-serif;
 }
 
-.lb-img {
-    max-width: 92vw;
-    max-height: 92vh;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+
+
+/* 字体 */
+h1,h2,h3,h4 {
+    font-weight: 400;
 }
 
-.lb-btn,
-.lb-close {
-    position: absolute;
-    border: none;
-    background: rgba(255, 255, 255, .18);
-    color: #fff;
-    width: 44px;
-    height: 44px;
-    border-radius: 999px;
-    cursor: pointer;
-    font-size: 24px;
-    display: grid;
-    place-items: center;
-    backdrop-filter: saturate(1.2) blur(6px);
+p,span {
+    font-weight: 300;
 }
 
-.lb-prev {
-    left: 24px;
+/* 去掉原点 */
+li {
+    list-style-type: none;
 }
 
-.lb-next {
-    right: 24px;
+a:link, a:visited {
+    color: #B55B39;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-.lb-close {
-    top: 24px;
-    right: 24px;
-    font-size: 28px;
-}
-
-.lb-btn:hover,
-.lb-close:hover {
-    background: rgba(255, 255, 255, .28);
-}
-
-/* 缩略图容器（横排 + 自动换行） */
-.img-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    
-}
-
-.img-row img {
-    width: 160px;
-    height: auto;
-    border-radius: 8px;
-    cursor: zoom-in;
-    border: 1px solid #e5e5e5; 
+a:hover {
+    color: #8C3A22;
 }
