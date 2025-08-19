@@ -1,26 +1,24 @@
 @import url("css/img-row.css");
 @import url("css/tab.css");
-@font-face {
-    font-family: 'TsangerJinKai';
-    src: url('fonts/仓耳今楷03-W03.ttf') format('truetype');
-    font-weight: 300;
-    /* 细 */
-    font-style: normal;
+@import url("css/card-row.css");
+:root {
+    --bg: #fafafa; /*#FAF9F6*/
+    --text: #424242;/*#333333*/
+    --border: #e5e5e5; 
+    --theme-color: #212121 /*#B55B39*/
+    --theme-hover: #000000; /*#8C3A22*/
+    --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+            Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 }
 
-@font-face {
-    font-family: 'TsangerJinKai';
-    src: url('fonts/仓耳今楷03-W04.ttf') format('truetype');
-    font-weight: 400;
-    /* 粗 */
-    font-style: normal;
+strong {
+    font-weight: 500;
 }
-
 
 body {
     margin: 80px;
-    /* 整个页面四周留 20px 空白 */
-    /* 或者用 padding: 20px; 让内容和浏览器边框之间留空 */
+    font-family: var(--font-sans);
+        line-height: 1.6;
 }
 @media (max-width: 600px) {
     body {
@@ -29,12 +27,7 @@ body {
     }
 }
 
-:root {
-    --bg: #FAF9F6;
-    /* 米白 */
-    --text: #333333;
-    /* 深灰 */
-}
+
 
 html,
 body {
@@ -60,11 +53,61 @@ li {
 }
 
 a:link, a:visited {
-    color: #B55B39;
+    color: var(--theme-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-weight: 300;
+}
+
+a:hover {
+    color: var(--theme-hover);
+}
+
+
+/* 分割线 */
+hr {
+    border: none;
+    border-top: 1px solid var(--border) 
+}
+
+nav{
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link{
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.nav-link[aria-current="page"] {
+    color: var(--theme-hover);
+    font-weight: 700;
+}
+
+a:link,
+a:visited {
+    color: var(--theme-color);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 a:hover {
-    color: #8C3A22;
+    color: var(--theme-hover);
+}
+/* 取消blog-list中a标签的样式 */
+.blog-list{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.blog-list a{
+    color: #333333;
+    display: block;
+}
+.blog-list a:hover {
+    color: #111;
+}
+.text-2xs{
+    font-size: 12px;
 }
