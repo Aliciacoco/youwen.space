@@ -1,0 +1,28 @@
+.library-card-row{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.library-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 15px;
+    gap: 10px;
+}
+.library-card:hover {
+    background-color: var(--bg-card);
+}
+.library-card img {
+    width: 300px;
+}
+
+/* 清掉子元素的默认上下外边距 */
+.library-card>h1,
+.library-card>h2,
+.library-card>h3,
+.library-card>p {
+    margin: 0;
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../main.css">
+    
+    <!-- 引入 Prism CSS 和 JS -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+
+</head>
+<body>
+    <h1>拖拽移动 Drag to move</h1>
+    <p>要点<br>
+        1. 通过记录鼠标按下的位置和鼠标实时位置来计算偏移量<br>
+        2. 元素原本的位置+偏移量=元素的新位置<br>
+        3. 注意：为了避免移动速度过快，导致movebar(操作拖动元素)失去监听,可监听整个body
+    </p>
+    <!-- 展示的可拖动内容 -->
+    <div class="content">
+        <!-- <div class="bg">
+            <img src="../../assets/imgs/2025-08-19_library_Drag to Move/flying.gif" class="moving-img">
+        </div> -->
+        <div class="container">
+            <div class="moveBar">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 上方标签区 -->
+    <div role="tablist">
+        <button role="tab" aria-selected="true" aria-controls="Html" id="Html">Html</button>
+        <button role="tab" aria-selected="false" aria-controls="Css" id="Css">Css</button>
+        <button role="tab" aria-selected="false" aria-controls="Js" id="Js">Js</button>
+    </div>
+    <hr>
+    <!-- 第1个面板 -->
+    <div id="Html" role="tabpanel">
+        <!-- 代码容器 -->
+        <pre><code class="language-html" id="code-block">要展示的代码</code></pre>
+        
+        <script>
+            const code = `
+    <!-- 外层容器 -->
+    <div class="container-header">
+        <!-- 拖动条（moveBar）：用于实现拖拽容器移动 -->
+        <div class="moveBar">
+            <!-- 三个小圆点（dot）-->
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+        `;
+        //找到页面上 id="code-block" 的元素，把里面的文字换成变量 code。
+        document.getElementById("code-block").textContent = code;
+        </script>
+    </div>
+
+    <!-- 第2个面板 -->
+    <div id="Css" role="tabpanel" hidden>
+        <!-- 代码容器 -->
+        <pre><code class="language-css" id="code-block2"></code></pre>
+    
+        <script>
+            const code2 = `
+    .container {
+        background-color: rgba(0, 0, 0, 0.9);/* 背景色（黑色半透明） */
+        width: 200px;/* 宽度 */
+        height: 200px;/* 高度 */
+        border-radius: 20px;/* 圆角 */
+        padding: 30px;/* 内边距 */
+        display: flex;
+        justify-content: flex-end;/* 子元素靠右对齐 */
+    }
+
+    .moveBar {
+        width: 40px;
+        height: 40px;
+        background-color: black;/* 顶部栏背景色 */
+        display: flex;
+        gap: 0.2rem;/* 点之间的间距 */
+        justify-content: center;/* 水平居中 */
+        align-items: center;/* 垂直居中 */
+        border-radius: 10px;
+    }
+
+    .dot {
+        height: 0.3rem;
+        width: 0.3rem;
+        border-radius: 100%;/* 圆形 */
+        background-color: white;
+    }
+            `;
+
+            document.getElementById("code-block2").textContent = code2;
+        </script>
+    </div>
+
+    <!-- 第3个面板 -->
+    <div id="Js" role="tabpanel" hidden>
+        <!-- 代码容器 -->
+        <pre><code class="language-js" id="code-block3"></code></pre>
+        
+        <script type="text/plain" id="code-src-3">
+    // 获取可拖动的元素
+    const moveBar = document.querySelector('.moveBar');
+    const wallet = document.querySelector('.container');
+
+    // 初始化变量
+    let mouseDownPos = { x: 0, y: 0 };  // 鼠标按下时的位置
+    let mouseBasicTrans = { x: 0, y: 0 };  // 记录元素的初始位置
+    let disX = 0, disY = 0;  // 鼠标的偏移量
+    let movable = false;  // 控制是否正在拖拽
+
+    // 鼠标按下时，记录鼠标初始位置
+    moveBar.addEventListener('mousedown', (e) => {
+        mouseDownPos.x = e.clientX;
+        mouseDownPos.y = e.clientY;
+        movable = true;
+        console.log(mouseDownPos.x,mouseDownPos.y)
+    });
+
+    // 鼠标移动时，更新位置
+    // 使用 document.body 监听 mousemove 事件,在鼠标移动速度较快时，moveBar 能够平滑地跟随鼠标，而不会出现过快或拖拽失效的情况。
+    document.body.addEventListener('mousemove', (e) => {
+        if (movable) {
+            disX = mouseBasicTrans.x + (e.clientX - mouseDownPos.x);  // 计算新的位置
+            disY = mouseBasicTrans.y + (e.clientY - mouseDownPos.y);
+            // 使用 CSS transform 属性实时更新位置
+            wallet.style.transform = `translate(${disX}px, ${disY}px)`;
+            //console.log(moveBar.style.transform)
+        }
+    });
+
+    // 鼠标松开时，停止拖拽
+    moveBar.addEventListener('mouseup', () => {
+        movable = false;  // 停止拖拽
+        mouseBasicTrans.x = disX;  // 更新元素的位置
+        mouseBasicTrans.y = disY;
+    });
+        </script>
+        
+        <script>
+            // 一次性把上面的纯文本塞进 code
+            document.getElementById('code-block3').textContent =
+                document.getElementById('code-src-3').textContent;
+        </script>
+    </div>
+
+
+    <script src="../../main.js" type="module"></script>
+</body>
+</html>
