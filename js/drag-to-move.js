@@ -1,4 +1,5 @@
-// 获取可拖动的元素
+if (document.body.dataset.feature === 'drag-to-move') {
+  // 获取可拖动的元素
 const moveBar = document.querySelector('.moveBar');
 const wallet = document.querySelector('.container');
 
@@ -35,3 +36,5 @@ moveBar.addEventListener('mouseup', () => {
     mouseBasicTrans.y = disY;
 });
 //#endregion
+}
+

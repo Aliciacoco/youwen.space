@@ -3,6 +3,8 @@
 @import url("css/card-row.css");
 @import url("css/library-card.css");
 @import url("css/drag-to-move.css");
+@import url("css/drag-sort.css");
+
 :root {
     --bg: #fafafa; /*#FAF9F6*/
     --bg-card: #f5f5f5;

@@ -1,0 +1,28 @@
+.drag-sort-container {
+    display: flex;
+    gap: 1rem;
+
+}
+
+.currency {
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: white;
+}
+
+.one-unit {
+    height: 5rem;
+    width: 6rem;
+    border-radius: 100rem;
+    display: flex;
+    flex-direction: column;/*垂直排列*/
+    justify-content: space-between;/*两边贴边*/
+    align-items: center;/*垂直居中*/
+    padding: 2rem 0;
+    background-color:var(--bg-dark);
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+}
+.is-dragging {
+    background-color: #4F46BA;
+}

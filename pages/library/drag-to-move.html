@@ -11,14 +11,15 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+    
 
 </head>
-<body>
+<body data-feature="drag-to-move">
     <h1>拖拽移动 Drag to move</h1>
     <p>要点<br>
-        1. 通过记录鼠标按下的位置和鼠标实时位置来计算偏移量<br>
-        2. 元素原本的位置+偏移量=元素的新位置<br>
-        3. 注意：为了避免移动速度过快，导致movebar(操作拖动元素)失去监听,可监听整个body
+        1. 记录鼠标按下时的位置，并实时跟踪鼠标位置，计算偏移量。<br>
+        2. 元素的新位置 = 元素初始位置 + 鼠标偏移量。<br>
+        3. 为避免移动过快导致拖动区域失去监听，应将事件监听绑定在 body 或全局。
     </p>
     <!-- 展示的可拖动内容 -->
     <div class="content">
