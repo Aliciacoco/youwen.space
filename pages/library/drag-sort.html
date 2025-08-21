@@ -6,15 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../main.css">
-    <!-- 引入 Prism-->
-    <!-- 加载 Prism 的主题样式表（这里选的是 Tomorrow 主题） -->
-    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet" />
-    <!-- 加载 Prism 的核心库，包含HTML/XML 的高亮 -->
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
-    <!-- 加载 JavaScript 语言的语法高亮模块。有了它，Prism 才能识别并给 <code class="language-javascript">...</code> 里的内容上色 -->
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
-    <!-- 加载 CSS 语言的语法高亮模块。类似上面，负责 <code class="language-css">...</code> 的高亮。 -->
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
 </head>
 
 <body data-feature="drag-sort">
@@ -26,23 +17,23 @@
     </p>
     <div class="content">
         <!-- 主体内容 -->
-        <div class="drag-sort-container">
-            <div class="one-unit">
-                <span class="currency">A</span>
-            </div>
-            <div class="one-unit">
-                <span class="currency">B</span>
-            </div>
-            <div class="one-unit">
-                <span class="currency">C</span>
-            </div>
-            <div class="one-unit">
-                <span class="currency">D</span>
-            </div>
-            <div class="one-unit">
-                <span class="currency">E</span>
-            </div>
-        </div>
+<div class="drag-sort-container">
+    <div class="one-unit">
+        <span class="currency">A</span>
+    </div>
+    <div class="one-unit">
+        <span class="currency">B</span>
+    </div>
+    <div class="one-unit">
+        <span class="currency">C</span>
+    </div>
+    <div class="one-unit">
+        <span class="currency">D</span>
+    </div>
+    <div class="one-unit">
+        <span class="currency">E</span>
+    </div>
+</div>
     </div>
     <!-- 上方标签区 -->
     <div role="tablist">
@@ -53,10 +44,7 @@
     <hr>
     <!-- 第1个面板 -->
     <div id="Html" role="tabpanel">
-
-        <!-- 用这个 div 来放“VS Code 风格”的只读代码编辑器 -->
         <div id="editor-html" style="height:420px;border-radius:12px;overflow:hidden"></div>
-    
     </div>
     
     <!-- 第2个面板 -->
@@ -66,257 +54,64 @@
     
     <!-- 第3个面板 -->
     <div id="Js" role="tabpanel" hidden>
-        <!-- 代码容器 -->
-        <pre><code class="language-js" id="code-block3"></code></pre>
-    
-        <script type="text/plain" id="code-src-3">
-    //#region STEP1:拖拽某个竖条
-    let blocksArr = [...document.querySelectorAll('.one-unit')];
-    let draggedItem = null;  // 当前拖动的元素
-    let unitMouseDownPos = { x: 0, y: 0 };  // 鼠标按下时的位置
-    let unitMouseBasicTrans = { x: 0, y: 0 };  // 记录元素的初始位置
-    let unitMovable = false;  // 控制是否正在拖拽
-    let unitdisX = 0, unitdisY = 0;  // 鼠标的偏移量
-    let moveWidth;
-
-    //监听元素
-    blocksArr.forEach(item => {
-        item.addEventListener('mousedown', handleMouseDown);
-        item.addEventListener('mouseup', handleMouseUp);
-        //item.addEventListener('transitionend',handleTransitionEnd);
-    });
-
-
-    //定义mousedown事件的处理函数
-    function handleMouseDown(e){
-        console.log("mousedown on", e.target);
-        if(e.currentTarget.classList.contains('add-unit')){
-            return;
-        }
-        else{
-            unitMovable = true;
-            //记录当前被点击的元素
-            draggedItem = e.currentTarget;
-            draggedItem.classList.add('is-dragging');
-
-            // 获取当前元素的 transform 偏移作为初始值
-            const style = window.getComputedStyle(draggedItem);
-            const matrix = new DOMMatrixReadOnly(style.transform);
-            unitMouseBasicTrans.x = matrix.m41;
-            unitMouseBasicTrans.y = matrix.m42;
-            //记录鼠标位置
-            unitMouseDownPos.x = e.clientX;
-            unitMouseDownPos.y = e.clientY;
-            //调整层级至最上方
-            draggedItem.style.zIndex = 999;
-            //获取该元素的宽度（STEP4使用）
-            unitWidth = draggedItem.getBoundingClientRect().width;
-            moveWidth = unitWidth + gapWidth;
-        }
-    }
-    //鼠标移动时，更新位置
-    document.body.addEventListener('mousemove',(e)=>{
-        if (unitMovable) {
-            unitdisX = unitMouseBasicTrans.x + (e.clientX - unitMouseDownPos.x);  // 计算新的位置
-            unitdisY = unitMouseBasicTrans.y + (e.clientY - unitMouseDownPos.y);
-            
-            // 使用 CSS transform 属性实时更新位置
-            draggedItem.style.transition = "none";
-            draggedItem.style.transform = `translate(${unitdisX}px, ${unitdisY}px)`;
-
-            //移动过程中其他元素自动排序（Step2使用）
-            changePos(unitdisX,moveWidth);
-        }
-    })
-
-    //#endregion
-
-    //#region STEP2:移动过程中其他元素自动排序
-
-    let unitWidth = null;//被选中元素宽度
-    let gapWidth = 16;//间隔宽度
-    let moveItem = null;
-    let moveItemIndex = null;
-    let moveStep;
-
-
-    function changePos(disX, moveWidth){
-        moveStep = parseInt(disX / moveWidth);
-        console.log(moveStep);
-
-        //来回拖动重置位置
-        for(let i = 0; i < blocksArr.length;i++){
-            if(i !== blocksArr.indexOf(draggedItem)){
-                blocksArr[i].style.transform = `translateX(0px) `
-            }
-            }
-            //向左移动
-            if(moveStep < 0){
-                for(let i = 1; i <= Math.abs(moveStep); i++){
-                    moveItemIndex = blocksArr.indexOf(draggedItem) - i;
-                    //判断是否在有效数组范围内，避免超出限制
-                    if(moveItemIndex >= 0 && blocksArr[moveItemIndex]){
-                        moveItem = blocksArr[moveItemIndex];
-                        moveItem.style.transform = `translateX(${moveWidth}px)`;
-                    }
-                    else{
-                        return;
-                    }
-                }
-            }
-            //向右移动
-            else if(moveStep > 0){
-                for(let i = 1; i <= Math.abs(moveStep); i++){
-                    moveItemIndex = blocksArr.indexOf(draggedItem) + i;
-                    //判断是否在有效数组范围内，避免超出限制
-                    if(moveItemIndex >= 0 && moveItemIndex < blocksArr.length){
-                        moveItem = blocksArr[moveItemIndex];
-                        moveItem.style.transform = `translateX(-${moveWidth}px)`;
-                    }
-                }
-            }
-    }
-    //#endregion
-
-    //#region STEP3: 鼠标松开时，停止拖拽
-    function handleMouseUp(e){
-        //让鼠标移动时不会触发move函数
-        unitMovable = false;  
-
-        //鼠标抬起后自动落位
-        //moveStep超出范围时如何处理
-        // //超出左边界
-        if(moveStep + blocksArr.indexOf(draggedItem) < 0){
-            moveStep = -blocksArr.indexOf(draggedItem)
-        }
-        //超出右边界
-        else if(moveStep + blocksArr.indexOf(draggedItem) >= blocksArr.length - 1){
-            moveStep = blocksArr.length - blocksArr.indexOf(draggedItem) -1;
-        }
-
-        //只处理“被拖拽元素”的 “transform” 过渡结束
-        //定义回调 onEnd，等事件发生时再去调用 handleTransitionEnd(e)
-        const onEnd = (e) => {
-        if (e.propertyName !== 'transform' || e.target !== draggedItem) return;
-        handleTransitionEnd(e);
-        };
-        //在动画结束时触发 onEnd，仅触发一次
-        draggedItem.addEventListener('transitionend', onEnd, { once: true });
-
-        //移动动画
-        if (draggedItem) {
-            draggedItem.style.transition = "transform 0.2s ease-in-out";
-            draggedItem.style.transform = `translateX(${moveStep * moveWidth}px)`;
-        }
-        console.log("鼠标抬起, moveStep=", moveStep);
-    }
-    //#endregion
-
-    //#region STEP5:插入后更新index
-
-    function handleTransitionEnd(e){
-
-        console.log("触发handleTransitionEnd")
-        
-        //声明目标索引位置
-        const targetIndex = moveStep + blocksArr.indexOf(draggedItem);
-
-        if (targetIndex >= 0 && targetIndex < blocksArr.length) {
-            
-            let parentElement = draggedItem.parentNode;  // 获取父节点
-
-            //向左移动，在目标前插入
-            if(moveStep < 0){
-                parentElement.insertBefore(draggedItem, blocksArr[targetIndex]); 
-            }
-            //向右移动，在目标后一个元素前插入
-            else if(moveStep > 0){
-                parentElement.insertBefore(draggedItem, blocksArr[targetIndex + 1]); 
-            }
-            //重新获取当前页面上所有可排序项
-            blocksArr = [...document.querySelectorAll('.one-unit')];
-            //临时关闭过渡
-            blocksArr.forEach(el => el.style.transition = 'none');
-            //清除位移
-            blocksArr.forEach(el => el.style.transform  = '');
-            //强制重排：立即让上面的样式变更生效
-            void parentElement.offsetWidth;
-            //下一帧恢复过渡
-            requestAnimationFrame(() => 
-            blocksArr.forEach(el => el.style.transition = ''));
-            }
-
-            blocksArr.forEach(el => {
-                el.style.removeProperty('z-index'); // 清掉所有内联 z-index
-                // 去掉拖拽时加的类
-                el.classList.remove('is-dragging');
-    });
-    }
-    //#endregion
-
-            </script>
-    
-        <script>
-            // 一次性把上面的纯文本塞进 code
-            document.getElementById('code-block3').textContent =
-                document.getElementById('code-src-3').textContent;
-        </script>
+        <div id="editor-js" style="height:420px;border-radius:12px;overflow:hidden"></div>
     </div>
-
-    <!-- Html代码 -->
-    <script src="../../main.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
-    <script>
-        // 你的要展示的代码
-        const codeHtml = `
-    //外侧容器
-    <div class="drag-sort-container">
-      <div class="one-unit"><span class="currency">A</span></div>
-      <div class="one-unit"><span class="currency">B</span></div>
-      <div class="one-unit"><span class="currency">C</span></div>
-      <div class="one-unit"><span class="currency">D</span></div>
-      <div class="one-unit"><span class="currency">E</span></div>
-    </div>`.trim();
-
-        // 配置 Monaco 的基础路径并创建只读编辑器（带折叠）
-        require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs' } });
-        require(['vs/editor/editor.main'], function () {
-            monaco.editor.create(document.getElementById('editor-html'), {
-                value: codeHtml,
-                language: 'html',          // 这个面板是 HTML
-                readOnly: true,
-                folding: true,             // ✅ 开启折叠
-                theme: 'vs-dark',
-                lineNumbers: 'on',
-                wordWrap: 'on',
-                minimap: { enabled: false },
-                automaticLayout: true
-            });
-        });
-    </script>
-
-    <!-- Css代码 -->
-    <!-- 编辑器容器 -->
-    <div id="editor-css" style="height:420px;border-radius:12px;overflow:hidden"></div>
     
     <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
+
+    <!--要展示的代码-->
+    <script src="../../main.js" type="module"></script>
     <script>
         require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs' } });
-        require(['vs/editor/editor.main'], async () => {
-            const path = '../../../css/drag-sort.css';   // ← 按你的实际位置改
-            const text = await (await fetch(path)).text();   // 需要用 http 本地服务器打开
+            require(['vs/editor/editor.main'], async function () {
+                // 公共选项（可选）
+                const baseOpts = {
+                    readOnly: true,
+                    folding: true,
+                    minimap: { enabled: false },
+                    theme: 'vs-dark',
+                    automaticLayout: true
+                    // lineNumbers:'on', wordWrap:'on'  // 需要再开
+                };
 
-            monaco.editor.create(document.getElementById('editor-css'), {
-                value: text,
-                language: 'css',
-                readOnly: true,
-                folding: true,
-                minimap: { enabled: false },
-                theme: 'vs-dark',
-                automaticLayout: true
+                // 1) HTML：直接用字符串（无需 fetch）
+
+                // 获取当前页面源码
+                const htmlPath = location.href; // 当前页面
+                const htmlText = await (await fetch(htmlPath)).text();
+
+                // 按行切分
+                const lines = htmlText.split("\n");
+
+                // 截取指定区间（第 19 ~ 36 行）
+                const snippet = lines.slice(19, 36).join("\n"); // 注意数组是从 0 开始
+
+                monaco.editor.create(document.getElementById('editor-html'), {
+                    ...baseOpts,
+                    value: snippet.trim(),
+                    language: 'html'
+                });
+
+                // 2) CSS：从文件读（按你的实际路径改）
+                const cssPath = '../../../css/drag-sort.css';
+                const cssText = await (await fetch(new URL(cssPath, location.href))).text();
+                monaco.editor.create(document.getElementById('editor-css'), {
+                    ...baseOpts,
+                    value: cssText,
+                    language: 'css'
+                });
+
+                // 3) JS：从文件读（按你的实际路径改），注意 language
+                const jsPath = '../../../js/drag-sort.js';
+                const jsText = await (await fetch(new URL(jsPath, location.href))).text();
+                monaco.editor.create(document.getElementById('editor-js'), {
+                    ...baseOpts,
+                    value: jsText,
+                    language: 'javascript'
+                });
             });
-        });
     </script>
+
 
 </body>
 

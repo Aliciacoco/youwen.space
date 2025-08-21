@@ -1,3 +1,4 @@
+// 这段逻辑只在 feature=drag-sort 的情况下执行
 if (document.body.dataset.feature === 'drag-sort') {
 
 //#region STEP1:拖拽某个竖条

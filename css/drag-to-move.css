@@ -6,30 +6,6 @@
     height: 300px;
     position: relative;
 }
-.bg {
-    width: 150px;
-    height: 150px;
-    z-index: 1;
-    position: absolute;
-    
-}
-.moving-img{
-    width: 100%;
-    position: relative;
-    animation: move-img 6s ease-in-out infinite alternate;
-    
-}
-
-@keyframes move-img {
-    from {
-        left: -400px;
-    }
-
-    to {
-        left: 400px;
-        /* 向右移动 */
-    }
-}
 
 .container {
     background-color: rgba(0, 0, 0, 0.8);/* 背景色（黑色半透明） */
@@ -52,6 +28,10 @@
     justify-content: center;/* 水平居中 */
     align-items: center;/* 垂直居中 */
     border-radius: 10px;
+
+    /* 以下为兼容手机设置 */
+    touch-action: none;/* 禁止默认滚动，让 pointermove 正常触发 */
+    user-select: none;/* 避免拖动时选中文本 */
 }
 
 .dot {

@@ -5,13 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../main.css">
-    
-    <!-- 引入 Prism CSS 和 JS -->
-    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
-    
 
 </head>
 <body data-feature="drag-to-move">
@@ -26,13 +19,13 @@
         <!-- <div class="bg">
             <img src="../../assets/imgs/2025-08-19_library_Drag to Move/flying.gif" class="moving-img">
         </div> -->
-        <div class="container">
-            <div class="moveBar">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-        </div>
+<div class="container">
+    <div class="moveBar">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+</div>
     </div>
     <!-- 上方标签区 -->
     <div role="tablist">
@@ -43,118 +36,73 @@
     <hr>
     <!-- 第1个面板 -->
     <div id="Html" role="tabpanel">
-        <!-- 代码容器 -->
-        <pre><code class="language-html" id="code-block">要展示的代码</code></pre>
-        
-        <script>
-            const code = `
-    <!-- 外层容器 -->
-    <div class="container-header">
-        <!-- 拖动条（moveBar）：用于实现拖拽容器移动 -->
-        <div class="moveBar">
-            <!-- 三个小圆点（dot）-->
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-    </div>
-        `;
-        //找到页面上 id="code-block" 的元素，把里面的文字换成变量 code。
-        document.getElementById("code-block").textContent = code;
-        </script>
+        <div id="editor-html" style="height:420px;border-radius:12px;overflow:hidden"></div>
     </div>
 
     <!-- 第2个面板 -->
     <div id="Css" role="tabpanel" hidden>
-        <!-- 代码容器 -->
-        <pre><code class="language-css" id="code-block2"></code></pre>
-    
-        <script>
-            const code2 = `
-    .container {
-        background-color: rgba(0, 0, 0, 0.9);/* 背景色（黑色半透明） */
-        width: 200px;/* 宽度 */
-        height: 200px;/* 高度 */
-        border-radius: 20px;/* 圆角 */
-        padding: 30px;/* 内边距 */
-        display: flex;
-        justify-content: flex-end;/* 子元素靠右对齐 */
-    }
-
-    .moveBar {
-        width: 40px;
-        height: 40px;
-        background-color: black;/* 顶部栏背景色 */
-        display: flex;
-        gap: 0.2rem;/* 点之间的间距 */
-        justify-content: center;/* 水平居中 */
-        align-items: center;/* 垂直居中 */
-        border-radius: 10px;
-    }
-
-    .dot {
-        height: 0.3rem;
-        width: 0.3rem;
-        border-radius: 100%;/* 圆形 */
-        background-color: white;
-    }
-            `;
-
-            document.getElementById("code-block2").textContent = code2;
-        </script>
+        <div id="editor-css" style="height:420px;border-radius:12px;overflow:hidden"></div>
     </div>
 
     <!-- 第3个面板 -->
     <div id="Js" role="tabpanel" hidden>
-        <!-- 代码容器 -->
-        <pre><code class="language-js" id="code-block3"></code></pre>
-        
-        <script type="text/plain" id="code-src-3">
-    // 获取可拖动的元素
-    const moveBar = document.querySelector('.moveBar');
-    const wallet = document.querySelector('.container');
-
-    // 初始化变量
-    let mouseDownPos = { x: 0, y: 0 };  // 鼠标按下时的位置
-    let mouseBasicTrans = { x: 0, y: 0 };  // 记录元素的初始位置
-    let disX = 0, disY = 0;  // 鼠标的偏移量
-    let movable = false;  // 控制是否正在拖拽
-
-    // 鼠标按下时，记录鼠标初始位置
-    moveBar.addEventListener('mousedown', (e) => {
-        mouseDownPos.x = e.clientX;
-        mouseDownPos.y = e.clientY;
-        movable = true;
-        console.log(mouseDownPos.x,mouseDownPos.y)
-    });
-
-    // 鼠标移动时，更新位置
-    // 使用 document.body 监听 mousemove 事件,在鼠标移动速度较快时，moveBar 能够平滑地跟随鼠标，而不会出现过快或拖拽失效的情况。
-    document.body.addEventListener('mousemove', (e) => {
-        if (movable) {
-            disX = mouseBasicTrans.x + (e.clientX - mouseDownPos.x);  // 计算新的位置
-            disY = mouseBasicTrans.y + (e.clientY - mouseDownPos.y);
-            // 使用 CSS transform 属性实时更新位置
-            wallet.style.transform = `translate(${disX}px, ${disY}px)`;
-            //console.log(moveBar.style.transform)
-        }
-    });
-
-    // 鼠标松开时，停止拖拽
-    moveBar.addEventListener('mouseup', () => {
-        movable = false;  // 停止拖拽
-        mouseBasicTrans.x = disX;  // 更新元素的位置
-        mouseBasicTrans.y = disY;
-    });
-        </script>
-        
-        <script>
-            // 一次性把上面的纯文本塞进 code
-            document.getElementById('code-block3').textContent =
-                document.getElementById('code-src-3').textContent;
-        </script>
+        <div id="editor-js" style="height:420px;border-radius:12px;overflow:hidden"></div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
+    
+    <!--要展示的代码-->
+    <script src="../../main.js" type="module"></script>
+    <script>
+        require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs' } });
+        require(['vs/editor/editor.main'], async function () {
+            // 公共选项（可选）
+            const baseOpts = {
+                readOnly: true,
+                folding: true,
+                minimap: { enabled: false },
+                theme: 'vs-dark',
+                automaticLayout: true
+                // lineNumbers:'on', wordWrap:'on'  // 需要再开
+            };
+
+            // 1) HTML：直接用字符串（无需 fetch）
+
+            // 获取当前页面源码
+            const htmlPath = location.href; // 当前页面
+            const htmlText = await (await fetch(htmlPath)).text();
+
+            // 按行切分
+            const lines = htmlText.split("\n");
+
+            // 截取指定区间（第 19 ~ 36 行）
+            const snippet = lines.slice(21, 28).join("\n"); // 注意数组是从 0 开始
+
+            monaco.editor.create(document.getElementById('editor-html'), {
+                ...baseOpts,
+                value: snippet.trim(),
+                language: 'html'
+            });
+
+            // 2) CSS：从文件读（按你的实际路径改）
+            const cssPath = '../../../css/drag-to-move.css';
+            const cssText = await (await fetch(new URL(cssPath, location.href))).text();
+            monaco.editor.create(document.getElementById('editor-css'), {
+                ...baseOpts,
+                value: cssText,
+                language: 'css'
+            });
+
+            // 3) JS：从文件读（按你的实际路径改），注意 language
+            const jsPath = '../../../js/drag-to-move.js';
+            const jsText = await (await fetch(new URL(jsPath, location.href))).text();
+            monaco.editor.create(document.getElementById('editor-js'), {
+                ...baseOpts,
+                value: jsText,
+                language: 'javascript'
+            });
+        });
+    </script>
 
     <script src="../../main.js" type="module"></script>
 </body>
