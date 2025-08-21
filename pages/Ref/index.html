@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../main.css">
+</head>
+
+<body>
+    <nav>
+        <a href="../../index.html" class="nav-link">由闻之境</a>
+        <a href="../library/index.html" class="nav-link" >Library</a>
+        <a href="/" class="nav-link" aria-current="page">Ref</a>
+        <a href="../blog/index.html" class="nav-link">Blog</a>
+    </nav>
+    <p class="text-2xs">If you can design one thing, you can design everything.</p>
+    <br>
+    <!-- 上方标签区 -->
+    <div role="tablist">
+        <!-- <button role="tab" aria-selected="true" aria-controls="Html" id="Html">Html</button> -->
+        <button role="tab" aria-selected="true" aria-controls="Css" id="Css">Css</button>
+        <button role="tab" aria-selected="false" aria-controls="Js" id="Js">Js</button>
+    </div>
+    <hr>
+    <!-- 第1个面板 -->
+    <!-- <div id="Html" role="tabpanel" hidden>
+        <h1>nothing</h1>
+    </div> -->
+    
+    <!-- 第2个面板 -->
+    <div id="Css" role="tabpanel">
+        <h4>Flex 轴向与居中</h4>
+        <pre class="code-card"><code>display: flex; // 把父容器设为 Flex 容器
+flex-direction: row | column; // 主轴方向：row=水平，column=垂直
+justify-content: center; // 沿“主轴”居中
+align-items: center; // 沿“交叉轴”居中</code></pre>
+    
+
+    <h4>justify-content属性</h4>
+        <pre class="code-card"><code>justify-content 必须配合 display: flex 才能生效:
+flex-start → 靠左排列（默认）
+
+center → 居中排列
+
+flex-end → 靠右排列
+
+space-between → 两端贴边，中间等间距
+[A]···[B]···[C]
+
+space-around → 每个元素两边有间距
+··[A]····[B]····[C]··
+
+space-evenly → 所有间距都相等
+    ···[A]···[B]···[C]···</code></pre>
+
+
+    <h4>css选择器</h4>
+    <pre class="code-card"><code>div
+标签选择器：选中所有 div 元素。
+
+.box
+类选择器：选中所有 class 为 box 的元素。
+
+#main
+ID 选择器：选中 id 为 main 的元素。
+
+.box div
+后代选择器：选中 .box 元素内部的所有 div（包括子孙元素）。
+
+.box > div
+子元素选择器：选中 .box 的直接子元素中的 div。
+
+div:first-child
+伪类选择器：选中那些是父元素第一个子元素的 div。
+
+div:nth-child(2)
+伪类选择器：同时满足两个条件：
+它是第 2 个子元素（按顺序数，不管标签类型）
+它的标签是 div</code></pre>
+    
+    </div>
+    
+    <!-- 第3个面板 -->
+    <div id="Js" role="tabpanel" hidden>
+        <h4>DOM 查询方法</h4>
+        <pre class="code-card"><code>document.querySelector(...) ：返回第一个匹配的元素</code></pre>
+        <pre class="code-card"><code>document.querySelectorAll(...)：返回所有匹配元素的静态列表</code></pre>
+        
+        <h4>DOM 事件监听</h4>
+        <pre class="code-card"><code>el.addEventListener('pointerdown', onPointerDown)：在元素 el 上订阅 pointerdown 事件；当事件发生时执行回调 onPointerDown。</code></pre>
+        
+        <h4>DOM 重排</h4>
+        <pre class="code-card"><code>parent.insertBefore(node, ref)：把 node 插到 ref 之前</code></pre>
+
+        <h4>位置与变换</h4>
+        <pre class="code-card"><code>el.style.transform = `translate(${x}px, ${y}px)`：把元素在二维平面位移 x/y 像素</code></pre>
+    </div>
+    <script src="../../main.js" type="module"></script>
+</html>
