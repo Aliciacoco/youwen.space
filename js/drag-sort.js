@@ -1,7 +1,9 @@
-// 这段逻辑只在 feature=drag-sort 的情况下执行
+// 仅当 <body data-feature="drag-sort"> 时启用本模块
 if (document.body.dataset.feature === 'drag-sort') {
 
 //#region STEP1:拖拽某个竖条
+
+//初始化变量
 let blocksArr = [...document.querySelectorAll('.one-unit')];
 let draggedItem = null;  // 当前拖动的元素
 let unitMouseDownPos = { x: 0, y: 0 };  // 鼠标按下时的位置
@@ -11,42 +13,42 @@ let unitdisX = 0, unitdisY = 0;  // 鼠标的偏移量
 let moveWidth;
 
 //监听元素
-  blocksArr.forEach(item => {
-    item.addEventListener('mousedown', handleMouseDown);
-    item.addEventListener('mouseup', handleMouseUp);
-    //item.addEventListener('transitionend',handleTransitionEnd);
-  });
+blocksArr.forEach(item => {
+item.addEventListener('pointerdown', handleMouseDown, { passive: false });
+});
+// 为避免移动过快导致拖动区域失去监听，将move/up事件监听绑定在全局
+window.addEventListener('pointermove', handleMouseMove);
+window.addEventListener('pointerup', handleMouseUp);
 
 
-//定义mousedown事件的处理函数
+// 鼠标按下时，记录鼠标初始位置
 function handleMouseDown(e){
+    //控制台调试用
     console.log("mousedown on", e.target);
-    if(e.currentTarget.classList.contains('add-unit')){
-        return;
-    }
-    else{
-        unitMovable = true;
-        //记录当前被点击的元素
-        draggedItem = e.currentTarget;
-        draggedItem.classList.add('is-dragging');
+    unitMovable = true;
 
-        // 获取当前元素的 transform 偏移作为初始值
-        const style = window.getComputedStyle(draggedItem);
-        const matrix = new DOMMatrixReadOnly(style.transform);
-        unitMouseBasicTrans.x = matrix.m41;
-        unitMouseBasicTrans.y = matrix.m42;
-        //记录鼠标位置
-        unitMouseDownPos.x = e.clientX;
-        unitMouseDownPos.y = e.clientY;
-        //调整层级至最上方
-        draggedItem.style.zIndex = 999;
-        //获取该元素的宽度（STEP4使用）
-        unitWidth = draggedItem.getBoundingClientRect().width;
-        moveWidth = unitWidth + gapWidth;
-    }
+    //记录当前被点击的元素
+    draggedItem = e.currentTarget;
+    draggedItem.classList.add('is-dragging');
+
+    // 获取当前元素的 transform 偏移作为初始值
+    const style = window.getComputedStyle(draggedItem);
+    const matrix = new DOMMatrixReadOnly(style.transform);
+    unitMouseBasicTrans.x = matrix.m41;
+    unitMouseBasicTrans.y = matrix.m42;
+
+    //记录鼠标位置
+    unitMouseDownPos.x = e.clientX;
+    unitMouseDownPos.y = e.clientY;
+    //调整层级至最上方
+    draggedItem.style.zIndex = 999;
+
+    //获取该元素的宽度（STEP4使用）
+    unitWidth = draggedItem.getBoundingClientRect().width;
+    moveWidth = unitWidth + gapWidth;
 }
 //鼠标移动时，更新位置
-document.body.addEventListener('mousemove',(e)=>{
+function handleMouseMove(e){
     if (unitMovable) {
         unitdisX = unitMouseBasicTrans.x + (e.clientX - unitMouseDownPos.x);  // 计算新的位置
         unitdisY = unitMouseBasicTrans.y + (e.clientY - unitMouseDownPos.y);
@@ -58,7 +60,7 @@ document.body.addEventListener('mousemove',(e)=>{
         //移动过程中其他元素自动排序（Step2使用）
         changePos(unitdisX,moveWidth);
     }
-})
+}
 
 //#endregion
 
@@ -111,6 +113,8 @@ function changePos(disX, moveWidth){
 
 //#region STEP3: 鼠标松开时，停止拖拽
 function handleMouseUp(e){
+    if (!unitMovable || !draggedItem) return;  
+    
     //让鼠标移动时不会触发move函数
     unitMovable = false;  
 
@@ -135,7 +139,6 @@ function handleMouseUp(e){
     draggedItem.addEventListener('transitionend', onEnd, { once: true });
 
 
-
     //移动动画
     if (draggedItem) {
         draggedItem.style.transition = "transform 0.2s ease-in-out";
@@ -145,7 +148,7 @@ function handleMouseUp(e){
 }
 //#endregion
 
-//#region STEP5:插入后更新index
+//#region STEP4:插入后更新index
 
 function handleTransitionEnd(e){
 

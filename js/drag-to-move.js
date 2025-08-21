@@ -1,4 +1,4 @@
-// 这段逻辑只在 feature=drag-to-move 的情况下执行
+// 仅当 <body data-feature="drag-to-move"> 时启用本模块
 if (document.body.dataset.feature === 'drag-to-move') {
 
     // 获取可拖动的元素
@@ -10,6 +10,13 @@ if (document.body.dataset.feature === 'drag-to-move') {
     let mouseBasicTrans = { x: 0, y: 0 };  // 记录元素的初始位置
     let disX = 0, disY = 0;  // 鼠标的偏移量
     let movable = false;  // 控制是否正在拖拽
+
+    // 监听元素
+    moveBar.addEventListener('pointerdown', onPointerDown);
+    // 为避免移动过快导致拖动区域失去监听，将move/up事件监听绑定在全局
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+
 
     // 鼠标按下时，记录鼠标初始位置
     function onPointerDown(e) {
@@ -38,12 +45,7 @@ if (document.body.dataset.feature === 'drag-to-move') {
         mouseBasicTrans.y = disY;
     }
 
-    // 用 pointer 事件代替 mouse/touch，兼容手机
-    moveBar.addEventListener('pointerdown', onPointerDown);
-    // 为避免移动过快导致拖动区域失去监听，将事件监听绑定在全局
-    window.addEventListener('pointermove', onPointerMove);
-    window.addEventListener('pointerup', onPointerUp);
-
+    
     //#endregion
 }
 
