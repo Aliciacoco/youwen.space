@@ -32,6 +32,15 @@ body {
         margin: 30px;
         /* 手机端的 margin 变小 */
     }
+    pre,
+    pre code {
+        white-space: pre-wrap;
+        /* 保留缩进/换行，同时允许自动换行 */
+        overflow-wrap: anywhere;
+        /* 很长的单词/连续字符也能断开 */
+        word-break: break-word;
+        /* 兼容性兜底 */
+    }
 }
 
 
