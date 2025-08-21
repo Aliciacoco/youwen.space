@@ -41,6 +41,9 @@ body {
         word-break: break-word;
         /* 兼容性兜底 */
     }
+    .one-unit {
+        height: 3rem;
+        width: 4rem;
 }
 
 
