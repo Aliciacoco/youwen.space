@@ -1,0 +1,27 @@
+.container-out{
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 60px;
+    background-color: var(--border);
+}
+
+.container-in {
+    width: 120px;
+    height: 150px;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 60px;
+    overflow: hidden
+}
+
+.container-in img {
+    transform-origin: center bottom;/* 缩放基点放在底部 */
+    width: 120px;
+    transition: all 0.2s ease-in-out;
+}
+
+.container-in:hover img {
+    transform: scale(1.25);
+}

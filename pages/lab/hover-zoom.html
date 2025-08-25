@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../main.css">
+</head>
+
+<body>
+    <h1>悬停放大 Hover Zoom</h1>
+    <p>要点<br>
+        1. 通过两层容器实现，外层实现圆形背景，内层用于裁切图片，背景透明，高度高于外层。<br>
+        2. 鼠标悬停时，图片以底部为缩放基点进行放大。<br>
+    </p>
+    <div class="content">
+<div class="container-out">
+    <div class="container-in">
+        <img src="../../assets/imgs/2025-08-22_lab_hover-zoom/avatar.svg" alt="">
+    </div>
+</div>
+    </div>
+    <!-- 上方标签区 -->
+    <div role="tablist">
+        <button role="tab" aria-selected="true" aria-controls="Html" id="Html">Html</button>
+        <button role="tab" aria-selected="false" aria-controls="Css" id="Css">Css</button>
+    </div>
+    <hr>
+    <!-- 第1个面板 -->
+    <div id="Html" role="tabpanel">
+        <div id="editor-html" style="height:420px;border-radius:12px;overflow:hidden"></div>
+    </div>
+    
+    <!-- 第2个面板 -->
+    <div id="Css" role="tabpanel" hidden>
+        <div id="editor-css" style="height:420px;border-radius:12px;overflow:hidden"></div>
+    </div>
+    
+    <!-- 第3个面板 -->
+    <div id="Js" role="tabpanel" hidden>
+        <div id="editor-js" style="height:420px;border-radius:12px;overflow:hidden"></div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
+    
+    <!--要展示的代码-->
+    <script src="../../main.js" type="module"></script>
+    <script>
+        require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs' } });
+        require(['vs/editor/editor.main'], async function () {
+            // 公共选项（可选）
+            const baseOpts = {
+                readOnly: true,
+                folding: true,
+                minimap: { enabled: false },
+                theme: 'vs-dark',
+                automaticLayout: true
+                // lineNumbers:'on', wordWrap:'on'  // 需要再开
+            };
+
+            // 1) HTML：直接用字符串（无需 fetch）
+
+            // 获取当前页面源码
+            const htmlPath = location.href; // 当前页面
+            const htmlText = await (await fetch(htmlPath)).text();
+
+            // 按行切分
+            const lines = htmlText.split("\n");
+
+            // 截取指定区间（第 19 ~ 36 行）
+            const snippet = lines.slice(17, 22).join("\n"); // 注意数组是从 0 开始
+
+            monaco.editor.create(document.getElementById('editor-html'), {
+                ...baseOpts,
+                value: snippet.trim(),
+                language: 'html'
+            });
+
+            // 2) CSS：从文件读（按你的实际路径改）
+            const cssPath = '../../../css/hover-zoom.css';
+            const cssText = await (await fetch(new URL(cssPath, location.href))).text();
+            monaco.editor.create(document.getElementById('editor-css'), {
+                ...baseOpts,
+                value: cssText,
+                language: 'css'
+            });
+        });
+    </script>
+
+    <script src="../../main.js" type="module"></script>
+</body>
+
+</html>

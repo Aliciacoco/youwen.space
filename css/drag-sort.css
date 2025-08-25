@@ -28,5 +28,5 @@
     user-select: none;
 }
 .is-dragging {
-    background-color: #F2C94C;
+    background-color: var(--theme);
 }

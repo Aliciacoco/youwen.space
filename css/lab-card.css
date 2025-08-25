@@ -1,10 +1,10 @@
-.library-card-row{
+.lab-card-row{
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
 }
 
-.library-card {
+.lab-card {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
@@ -12,17 +12,17 @@
     padding: 15px;
     gap: 10px;
 }
-.library-card:hover {
+.llab-card:hover {
     background-color: var(--bg-card);
 }
-.library-card img {
+.lab-card img {
     width: 300px;
 }
 
 /* 清掉子元素的默认上下外边距 */
-.library-card>h1,
-.library-card>h2,
-.library-card>h3,
-.library-card>p {
+.lab-card>h1,
+.lab-card>h2,
+.lab-card>h3,
+.lab-card>p {
     margin: 0;
 }
