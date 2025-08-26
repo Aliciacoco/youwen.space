@@ -7,6 +7,7 @@
 @import url("css/ref.css");
 @import url("css/hover-zoom.css");
 @import url("css/learning-language.css");
+@import url("css/parallax-scrolling.css");
 
 :root {
     --bg: #fafafa; /*#FAF9F6*/

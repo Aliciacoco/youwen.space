@@ -7,24 +7,36 @@
     <title>Document</title>
     <link rel="stylesheet" href="../../main.css">
 </head>
-
-<body data-feature="hover-zoom">
-    <h1>悬停放大 Hover Zoom</h1>
+<body data-feature="parallax-scrolling">
+    <h1>视差滚动 Parallax Scrolling</h1>
     <p>要点<br>
-        1. 通过两层容器实现，外层实现圆形背景，内层用于裁切图片，背景透明，高度高于外层。<br>
-        2. 鼠标悬停时，图片以底部为缩放基点进行放大。<br>
+        1. 监听页面的滚动距离，为元素设置不同方向、不同速度的位移、颜色变化、放大缩小等操作。<br>
+        2. 可以设定元素在特定位置停止，或与其他元素同步移动。<br>
     </p>
-    <div class="content">
-<div class="container-out">
-    <div class="container-in">
-        <img src="../../assets/imgs/2025-08-22_lab_hover-zoom/avatar.svg" alt="">
+<div class="content-scrolling">
+    <div class="parallax">
+        <h1 class="fixed-number">20</h1>
+        <h1>22</h1>
     </div>
+    <div class="parallax">
+        <h1>23</h1>
+    </div>
+    <div class="parallax">
+        <h1>24</h1>
+    </div>
+    <div class="parallax">
+        <h1>25</h1>
+    </div>
+    
+    <br><br><br><br><br><br><br><br><br><br>
 </div>
-    </div>
+
+
     <!-- 上方标签区 -->
     <div role="tablist">
         <button role="tab" aria-selected="true" aria-controls="Html" id="Html">Html</button>
         <button role="tab" aria-selected="false" aria-controls="Css" id="Css">Css</button>
+        <button role="tab" aria-selected="false" aria-controls="Js" id="Js">Js</button>
     </div>
     <hr>
     <!-- 第1个面板 -->
@@ -68,8 +80,8 @@
             // 按行切分
             const lines = htmlText.split("\n");
 
-            // 截取指定区间（第 19 ~ 36 行）
-            const snippet = lines.slice(17, 22).join("\n"); // 注意数组是从 0 开始
+            // 截取指定区间
+            const snippet = lines.slice(16, 32).join("\n"); // 注意数组是从 0 开始
 
             monaco.editor.create(document.getElementById('editor-html'), {
                 ...baseOpts,
@@ -78,16 +90,24 @@
             });
 
             // 2) CSS：从文件读（按你的实际路径改）
-            const cssPath = '../../../css/hover-zoom.css';
+            const cssPath = '../../../css/parallax-scrolling.css';
             const cssText = await (await fetch(new URL(cssPath, location.href))).text();
             monaco.editor.create(document.getElementById('editor-css'), {
                 ...baseOpts,
                 value: cssText,
                 language: 'css'
             });
+
+            // 3) JS：从文件读（按你的实际路径改），注意 language
+            const jsPath = '../../../js/parallax-scrolling.js';
+            const jsText = await (await fetch(new URL(jsPath, location.href))).text();
+            monaco.editor.create(document.getElementById('editor-js'), {
+                ...baseOpts,
+                value: jsText,
+                language: 'javascript'
+            });
         });
     </script>
-
     <script src="../../main.js" type="module"></script>
 </body>
 
