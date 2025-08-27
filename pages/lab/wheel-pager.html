@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../main.css">
+</head>
+
+<body data-feature="wheel-pager">
+    <h1>滚动翻页 Wheel Pager</h1>
+    <p>要点<br>
+        1. 通过监听 wheel 事件监测用户的滚动操作，根据滚动方向和频率控制页面内容的位移，从而实现翻页效果。<br>
+        2. 页面偏移的单位应与元素的宽度或高度保持一致（如 100% 或 100vw / 100vh），以确保每次翻页都能精准对齐目标内容。
+    </p>
+    <!-- 实验一: 上下翻页******************************************************************************-->
+    <div class="content-wheel-up">
+        <div class="content-box-up">
+            <div class="content1-up"><span>A</span><p>鼠标滚轮上下翻页</p></div>
+            <div class="content2-up"><span>B</span><p>鼠标滚轮上下翻页</p></div>
+            <div class="content3-up"><span>C</span><p>鼠标滚轮上下翻页</p></div>
+            <div class="content4-up"><span>D</span><p>鼠标滚轮上下翻页</p></div>
+        </div>
+    </div>
+    <br><br><br>
+    <!-- 实验二: 左右翻页****************************************************************************** -->
+    <div class="content-wheel-left">
+        <div class="content-box-left">
+            <div class="content1-left"><span>A</span><p>鼠标滚轮左右翻页</p></div>
+            <div class="content2-left"><span>B</span><p>鼠标滚轮左右翻页</p></div>
+            <div class="content3-left"><span>C</span><p>鼠标滚轮左右翻页</p></div>
+            <div class="content4-left"><span>D</span><p>鼠标滚轮左右翻页</p></div>
+        </div>
+    </div>
+
+
+    <!-- 上方标签区 -->
+    <div role="tablist">
+        <button role="tab" aria-selected="true" aria-controls="Html" id="Html">Html</button>
+        <button role="tab" aria-selected="false" aria-controls="Css" id="Css">Css</button>
+        <button role="tab" aria-selected="false" aria-controls="Js" id="Js">Js</button>
+    </div>
+    <hr>
+    <!-- 第1个面板 -->
+    <div id="Html" role="tabpanel">
+        <div id="editor-html" style="height:420px;border-radius:12px;overflow:hidden"></div>
+    </div>
+    
+    <!-- 第2个面板 -->
+    <div id="Css" role="tabpanel" hidden>
+        <div id="editor-css" style="height:420px;border-radius:12px;overflow:hidden"></div>
+    </div>
+    
+    <!-- 第3个面板 -->
+    <div id="Js" role="tabpanel" hidden>
+        <div id="editor-js" style="height:420px;border-radius:12px;overflow:hidden"></div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
+    
+    <!--要展示的代码-->
+    <script src="../../main.js" type="module"></script>
+    <script>
+        require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs' } });
+        require(['vs/editor/editor.main'], async function () {
+            // 公共选项（可选）
+            const baseOpts = {
+                readOnly: true,
+                folding: true,
+                minimap: { enabled: false },
+                theme: 'vs-dark',
+                automaticLayout: true
+                // lineNumbers:'on', wordWrap:'on'  // 需要再开
+            };
+
+            // 1) HTML：直接用字符串（无需 fetch）
+
+            // 获取当前页面源码
+            const htmlPath = location.href; // 当前页面
+            const htmlText = await (await fetch(htmlPath)).text();
+
+            // 按行切分
+            const lines = htmlText.split("\n");
+
+            // 截取指定区间
+            const snippet = lines.slice(16, 36).join("\n"); // 注意数组是从 0 开始
+
+            monaco.editor.create(document.getElementById('editor-html'), {
+                ...baseOpts,
+                value: snippet.trim(),
+                language: 'html'
+            });
+
+            // 2) CSS：从文件读（按你的实际路径改）
+            const cssPath = '../../../css/wheel-pager.css';
+            const cssText = await (await fetch(new URL(cssPath, location.href))).text();
+            monaco.editor.create(document.getElementById('editor-css'), {
+                ...baseOpts,
+                value: cssText,
+                language: 'css'
+            });
+
+            // 3) JS：从文件读（按你的实际路径改），注意 language
+            const jsPath = '../../../js/wheel-pager.js';
+            const jsText = await (await fetch(new URL(jsPath, location.href))).text();
+            monaco.editor.create(document.getElementById('editor-js'), {
+                ...baseOpts,
+                value: jsText,
+                language: 'javascript'
+            });
+        });
+    </script>
+
+
+    <script src="../../main.js" type="module"></script>
+</body>
+
+</html>

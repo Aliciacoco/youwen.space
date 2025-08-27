@@ -8,6 +8,7 @@
 @import url("css/hover-zoom.css");
 @import url("css/learning-language.css");
 @import url("css/parallax-scrolling.css");
+@import url("css/wheel-pager.css");
 
 :root {
     --bg: #fafafa; /*#FAF9F6*/
@@ -16,7 +17,7 @@
     --theme:#42A5F5;
     --text: #424242;/*#333333*/
     --border: #e0e0e0; 
-    --theme-color: #212121 /*#B55B39*/
+    --theme-color: #212121; /*#B55B39*/
     --theme-hover: #000000; /*#8C3A22*/
     --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
             Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
@@ -79,18 +80,6 @@ li {
     list-style-type: none;
 }
 
-a:link, a:visited {
-    color: var(--theme-color);
-    text-decoration: none;
-    transition: color 0.2s ease;
-    font-weight: 300;
-}
-
-a:hover {
-    color: var(--theme-hover);
-}
-
-
 /* 分割线 */
 hr {
     border: none;
@@ -122,6 +111,7 @@ a:visited {
 a:hover {
     color: var(--theme-hover);
 }
+
 /* 取消blog-list中a标签的样式 */
 .blog-list{
     display: flex;
@@ -137,4 +127,10 @@ a:hover {
 }
 .text-2xs{
     font-size: 12px;
+}
+.link {
+  color: var(--color-link, #0066cc);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.18s ease;
 }
