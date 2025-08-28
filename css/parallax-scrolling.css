@@ -6,6 +6,9 @@
     height: 150px;
     z-index: 999;
     transform: translate(-50%, 0);
+    /* 防抖 */
+    will-change: transform;
+    transform-origin: center top;
 }
 .back {
     height: 400px;
