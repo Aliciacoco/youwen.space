@@ -10,27 +10,11 @@
 <body data-feature="parallax-scrolling">
     <h1>视差滚动 Parallax Scrolling</h1>
     <p>要点<br>
-        1. 监听页面的滚动距离，为元素设置不同方向、不同速度的位移、颜色变化、放大缩小等操作。<br>
-        2. 可以设定元素在特定位置停止，或与其他元素同步移动。<br>
+        1. 利用滚动时不同元素的移动速度差，制造层次感和视觉深度。<br>
+        2. 常通过监听 scroll 并用 transform 实现位置、旋转等动态变化。
     </p>
-<div class="content-scrolling">
-    <div class="parallax">
-        <h1 class="fixed-number">20</h1>
-        <h1>22</h1>
-    </div>
-    <div class="parallax">
-        <h1>23</h1>
-    </div>
-    <div class="parallax">
-        <h1>24</h1>
-    </div>
-    <div class="parallax">
-        <h1>25</h1>
-    </div>
-    
-    <br><br><br><br><br><br><br><br><br><br>
-</div>
-
+    <h1 class="title"><img src="../../assets/imgs/2025-08-25_lab_parallax-scrolling/ball.svg" alt=""></h1>
+    <div class="back"></div>
 
     <!-- 上方标签区 -->
     <div role="tablist">
@@ -41,18 +25,21 @@
     <hr>
     <!-- 第1个面板 -->
     <div id="Html" role="tabpanel">
-        <div id="editor-html" style="height:420px;border-radius:12px;overflow:hidden"></div>
+        <div id="editor-html" style="height:420px;border-radius:12px;overflow:hidden;z-index: 1;position:relative;"></div>
     </div>
     
     <!-- 第2个面板 -->
     <div id="Css" role="tabpanel" hidden>
-        <div id="editor-css" style="height:420px;border-radius:12px;overflow:hidden"></div>
+        <div id="editor-css" style="height:420px;border-radius:12px;overflow:hidden;z-index: 1;position:relative;"></div>
     </div>
     
     <!-- 第3个面板 -->
     <div id="Js" role="tabpanel" hidden>
-        <div id="editor-js" style="height:420px;border-radius:12px;overflow:hidden"></div>
+        <div id="editor-js" style="height:420px;border-radius:12px;overflow:hidden;z-index: 1;position:relative;"></div>
     </div>
+
+    <!-- 为了滚动增加的空白区 -->
+    <div class="back2"></div>
     
     <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
     
