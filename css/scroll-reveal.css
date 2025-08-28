@@ -8,6 +8,7 @@ body[data-feature="scroll-reveal"]{
         background-color: #000;
         height: 400px;
         overflow-y: auto;
+        overflow-x: hidden;/* 禁止左右滚动 */
         gap: 20px;
         padding: 30px;
         box-sizing: border-box;
