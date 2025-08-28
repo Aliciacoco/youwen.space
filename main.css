@@ -9,7 +9,7 @@
 @import url("css/learning-language.css");
 @import url("css/parallax-scrolling.css");
 @import url("css/wheel-pager.css");
-
+@import url("css/scroll-reveal.css");
 :root {
     --bg: #fafafa; /*#FAF9F6*/
     --bg-card: #f5f5f5;

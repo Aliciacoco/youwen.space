@@ -1,0 +1,36 @@
+/* 仅当 body 设置了这个特性时才生效 */
+body[data-feature="scroll-reveal"]{
+    .content-scroll-reveal {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #000;
+        height: 400px;
+        overflow-y: auto;
+        gap: 20px;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+    
+    .todo {
+        width: 300px;
+        background-color: var(--bg-dark);
+        padding: 24px;
+        color: white;
+        border-radius: 10px;
+        opacity: 0;/* 初始不可见 */
+        transform: translateY(50px);/* 初始位置下移 50px */
+        transition: all 0.6s ease;
+    }
+    .todo.show{
+        opacity: 1;/* 显现出来 */
+        transform: translateY(0);/* 回到原始位置 */
+    }
+
+    .todo span {
+        font-size: 16px;
+        font-weight: 500;
+    }
+   
+}

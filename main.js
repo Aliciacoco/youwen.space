@@ -5,3 +5,4 @@ import './js/drag-sort.js';
 import './js/learning-language.js';
 import './js/parallax-scrolling.js';
 import './js/wheel-pager.js';
+import './js/scroll-reveal.js';
