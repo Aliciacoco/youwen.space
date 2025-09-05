@@ -72,33 +72,33 @@
 
 /* 不同背景色 */
 .content1-up {
-    background-color: #ffd4ee;
+    background-color: #BBDEFB;
 }
 
 .content2-up {
-    background-color: #F6a2d5;
+    background-color: #64B5F6;
 }
 
 .content3-up {
-    background-color: #Fb7f90;
+    background-color: #42A5F5;
 }
 
 .content4-up {
-    background-color: #e94c7c;
+    background-color: #1E88E5;
 }
 
 .content1-left {
-    background-color: #aad94e;
+    background-color: #1E88E5;
 }
 
 .content2-left {
-    background-color: #8abc19;
+    background-color: #42A5F5;
 }
 
 .content3-left {
-    background-color: #5bb53c;
+    background-color: #64B5F6;
 }
 
 .content4-left {
-    background-color: #00873a;
+    background-color: #BBDEFB;
 }

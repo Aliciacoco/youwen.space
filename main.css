@@ -134,3 +134,36 @@ a:hover {
   font-weight: 500;
   transition: color 0.18s ease;
 }
+
+/* 项目卡片样式 */
+.budget-card {
+    width: 400px;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.budget-card h4{
+    margin-bottom: 5px;
+}
+.logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+}
+
+
+.budget-card-url {
+    font-size: 12px;
+    color:red;
+    text-decoration: none;
+}
+
+.desc {
+    font-size: 14px;
+    margin-top: 20px;
+    line-height: 1.6;
+}

@@ -19,15 +19,14 @@
     <br>
     <!-- 上方标签区 -->
     <div role="tablist">
-        <!-- <button role="tab" aria-selected="true" aria-controls="Html" id="Html">Html</button> -->
+        
         <button role="tab" aria-selected="true" aria-controls="Css" id="Css">Css</button>
         <button role="tab" aria-selected="false" aria-controls="Js" id="Js">Js</button>
+        <button role="tab" aria-selected="false" aria-controls="React" id="React">React</button>
+        <button role="tab" aria-selected="false" aria-controls="Deploy" id="React">Deploy</button>
     </div>
     <hr>
-    <!-- 第1个面板 -->
-    <!-- <div id="Html" role="tabpanel" hidden>
-        <h1>nothing</h1>
-    </div> -->
+    
     
     <!-- 第2个面板 -->
     <div id="Css" role="tabpanel">
@@ -98,5 +97,17 @@ div:nth-child(2)
         <h4>位置与变换</h4>
         <pre class="code-card"><code>el.style.transform = `translate(${x}px, ${y}px)`：把元素在二维平面位移 x/y 像素</code></pre>
     </div>
+
+    <!-- 第3个面板 -->
+    <div id="React" role="tabpanel" hidden>
+            <h1>nothing</h1>
+    </div>
+
+    <!-- 第4个面板 -->
+    <div id="Deploy" role="tabpanel" hidden>
+        <h1>nothing</h1>
+    </div>
+
+
     <script src="../../main.js" type="module"></script>
 </html>
