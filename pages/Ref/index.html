@@ -2,112 +2,220 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../main.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ref 笔记</title>
+    <link rel="stylesheet" href="../../main.css" />
+    <style>
+        .editor-box {
+            height: 400px;
+            margin-bottom: 32px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        h4 {
+            margin-top: 2em;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
     <nav>
         <a href="../../index.html" class="nav-link">由闻之境</a>
-        <a href="../lab/index.html" class="nav-link" >Lab</a>
+        <a href="../lab/index.html" class="nav-link">Lab</a>
         <a href="/" class="nav-link" aria-current="page">Ref</a>
         <a href="../blog/index.html" class="nav-link">Blog</a>
     </nav>
     <p class="text-2xs">If you can design one thing, you can design everything.</p>
-    <br>
-    <!-- 上方标签区 -->
+    <br />
+
+    <!-- 标签页按钮 -->
     <div role="tablist">
-        
-        <button role="tab" aria-selected="true" aria-controls="Css" id="Css">Css</button>
-        <button role="tab" aria-selected="false" aria-controls="Js" id="Js">Js</button>
-        <button role="tab" aria-selected="false" aria-controls="React" id="React">React</button>
-        <button role="tab" aria-selected="false" aria-controls="Deploy" id="React">Deploy</button>
+        <button role="tab" aria-selected="true" aria-controls="CssPanel" id="Css">Css</button>
+        <button role="tab" aria-selected="false" aria-controls="JsPanel" id="Js">Js</button>
+        <button role="tab" aria-selected="false" aria-controls="ReactPanel" id="React">React</button>
+        <button role="tab" aria-selected="false" aria-controls="DeployPanel" id="Deploy">Deploy</button>
     </div>
-    <hr>
-    
-    
-    <!-- 第2个面板 -->
-    <div id="Css" role="tabpanel">
+    <hr />
+
+    <!-- 面板们 -->
+    <div id="CssPanel" role="tabpanel">
         <h4>Flex 轴向与居中</h4>
-        <pre class="code-card"><code>display: flex; // 把父容器设为 Flex 容器
-flex-direction: row | column; // 主轴方向：row=水平，column=垂直
-justify-content: center; // 沿“主轴”居中
-align-items: center; // 沿“交叉轴”居中</code></pre>
-    
+        <div class="editor-box" id="editor-css-1"></div>
 
-    <h4>justify-content属性</h4>
-        <pre class="code-card"><code>注意：justify-content 必须配合 display: flex 才能生效:
+        <h4>justify-content属性</h4>
+        <div class="editor-box" id="editor-css-2"></div>
 
-flex-start → 靠左排列（默认）
-
-center → 居中排列
-
-flex-end → 靠右排列
-
-space-between → 两端贴边，中间等间距
-[A]···[B]···[C]
-
-space-around → 每个元素两边有间距
-··[A]····[B]····[C]··
-
-space-evenly → 所有间距都相等
-    ···[A]···[B]···[C]···</code></pre>
-
-
-    <h4>CSS选择器</h4>
-    <pre class="code-card"><code>div
-标签选择器：选中所有 div 元素。
-
-.box
-类选择器：选中所有 class 为 box 的元素。
-
-#main
-ID 选择器：选中 id 为 main 的元素。
-
-.box div
-后代选择器：选中 .box 元素内部的所有 div（包括子孙元素）。
-
-.box > div
-子元素选择器：选中 .box 的直接子元素中的 div。
-
-div:first-child
-伪类选择器：选中那些是父元素第一个子元素的 div。
-
-div:nth-child(2)
-伪类选择器：同时满足两个条件：
-（1）它是第 2 个子元素（按顺序数，不管标签类型）
-（2）它的标签是 div</code></pre>
-    
+        <h4>CSS选择器</h4>
+        <div class="editor-box" id="editor-css-3"></div>
     </div>
-    
-    <!-- 第3个面板 -->
-    <div id="Js" role="tabpanel" hidden>
+
+    <div id="JsPanel" role="tabpanel" class="hidden">
         <h4>DOM 查询方法</h4>
-        <pre class="code-card"><code>document.querySelector(...) ：返回第一个匹配的元素</code></pre>
-        <pre class="code-card"><code>document.querySelectorAll(...)：返回所有匹配元素的静态列表</code></pre>
-        
-        <h4>DOM 事件监听</h4>
-        <pre class="code-card"><code>el.addEventListener('pointerdown', onPointerDown)：在元素 el 上订阅 pointerdown 事件；当事件发生时执行回调 onPointerDown。</code></pre>
-        
-        <h4>DOM 重排</h4>
-        <pre class="code-card"><code>parent.insertBefore(node, ref)：把 node 插到 ref 之前</code></pre>
+        <div class="editor-box" id="editor-js-1"></div>
 
-        <h4>位置与变换</h4>
-        <pre class="code-card"><code>el.style.transform = `translate(${x}px, ${y}px)`：把元素在二维平面位移 x/y 像素</code></pre>
+        <h4>事件监听与位置变换</h4>
+        <div class="editor-box" id="editor-js-2"></div>
     </div>
 
-    <!-- 第3个面板 -->
-    <div id="React" role="tabpanel" hidden>
-            <h1>nothing</h1>
+    <div id="ReactPanel" role="tabpanel" class="hidden">
+        <h4>useEffect 与状态变化</h4>
+        <div class="editor-box" id="editor-react-1"></div>
+
+        <h4>React 与原生 JS 对比</h4>
+        <div class="editor-box" id="editor-react-2"></div>
+
+        <h4>异步加载数据</h4>
+        <div class="editor-box" id="editor-react-3"></div>
     </div>
 
-    <!-- 第4个面板 -->
-    <div id="Deploy" role="tabpanel" hidden>
-        <h1>nothing</h1>
+    <div id="DeployPanel" role="tabpanel" class="hidden">
+        <h1>Nothing</h1>
     </div>
 
+    <!-- Monaco Editor CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
 
+    <!-- 初始化 Monaco -->
+    <script>
+        require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs' } });
+        require(['vs/editor/editor.main'], function () {
+            const baseOpts = {
+                readOnly: true,
+                folding: true,
+                minimap: { enabled: false },
+                theme: 'vs-dark',
+                automaticLayout: true
+            };
+
+            // --- CSS ---
+            monaco.editor.create(document.getElementById('editor-css-1'), {
+                ...baseOpts,
+                language: 'css',
+                value: `display: flex;                 /* 启用弹性布局，容器变为 flex 容器 */
+flex-direction: row | column; /* 主轴方向：row 水平、column 垂直 */
+justify-content: center;      /* 主轴（横向或纵向）上居中对齐子元素 */
+align-items: center;          /* 交叉轴（与主轴垂直）上居中对齐子元素 */`
+            });
+
+            monaco.editor.create(document.getElementById('editor-css-2'), {
+                ...baseOpts,
+                language: 'css',
+                value: `/* 注意：justify-content 必须配合 display: flex 才能生效 */
+
+flex-start     /* 靠左排列（默认） */
+center         /* 居中排列 */
+flex-end       /* 靠右排列 */
+space-between  /* 两端贴边，中间等间距 */
+space-around   /* 每个元素两边有间距 */
+space-evenly   /* 所有间距都相等 */`
+            });
+
+            monaco.editor.create(document.getElementById('editor-css-3'), {
+                ...baseOpts,
+                language: 'css',
+                value: `div             /* 标签选择器 */
+.box            /* 类选择器 */
+#main           /* ID 选择器 */
+.box div        /* 后代选择器 */
+.box > div      /* 子元素选择器 */
+div:first-child /* 伪类选择器 */
+div:nth-child(2) /* 第2个子元素是div标签 */`
+            });
+
+            // --- JS ---
+            monaco.editor.create(document.getElementById('editor-js-1'), {
+                ...baseOpts,
+                language: 'javascript',
+                value: `// 选择匹配到的第一个元素（比如第一个 .box）
+document.querySelector('.box');
+
+// 选择所有匹配的元素（比如页面上所有 .box）
+document.querySelectorAll('.box');;`
+            });
+
+            monaco.editor.create(document.getElementById('editor-js-2'), {
+                ...baseOpts,
+                language: 'javascript',
+                value: `// 设置元素的位置（通过平移变换方式，x/y 是偏移量）
+el.style.transform = \`translate(\${x}px, \${y}px)\`;`
+            });
+
+            // --- React ---
+            monaco.editor.create(document.getElementById('editor-react-1'), {
+                ...baseOpts,
+                language: 'javascript',
+                value: `useEffect(() => {
+  console.log('count 变了');
+}, [count]);
+
+useEffect(() => {
+  console.log('只运行一次');
+}, []);`
+            });
+
+            monaco.editor.create(document.getElementById('editor-react-2'), {
+                ...baseOpts,
+                language: 'javascript',
+                value: `// ✅ 原生 JavaScript 写法
+let count = 0;
+
+function increase() {
+  count += 1;
+  document.querySelector('.count-text').innerText = \`你点了 \${count} 次\`;
+}
+
+// ✅ React 写法
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>你点了 {count} 次</p>
+      <button onClick={() => setCount(count + 1)}>点我</button>
+    </div>
+  );
+}`
+            });
+
+            monaco.editor.create(document.getElementById('editor-react-3'), {
+                ...baseOpts,
+                language: 'javascript',
+                value: `const [data, setData] = useState('');
+
+useEffect(() => {
+  fetch('/api/data')
+    .then(res => res.json())
+    .then(setData);
+}, []);`
+            });
+        });
+    </script>
+
+    <!-- 标签页切换 -->
+    <script>
+        const tabs = document.querySelectorAll('[role="tab"]');
+        const panels = document.querySelectorAll('[role="tabpanel"]');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+                panels.forEach(p => p.classList.add('hidden'));
+
+                tab.setAttribute('aria-selected', 'true');
+                const target = document.getElementById(tab.getAttribute('aria-controls'));
+                target.classList.remove('hidden');
+            });
+        });
+    </script>
+
+    <!-- 你自己的 JS -->
     <script src="../../main.js" type="module"></script>
+</body>
+
 </html>

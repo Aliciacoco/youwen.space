@@ -137,7 +137,7 @@ a:hover {
 
 /* 项目卡片样式 */
 .budget-card {
-    width: 400px;
+    width: 350px;
     text-align: center;
     padding: 20px;
     border: 1px solid #ddd;
@@ -166,4 +166,13 @@ a:hover {
     font-size: 14px;
     margin-top: 20px;
     line-height: 1.6;
+}
+
+/* Monaco编辑器样式 */
+.editor-box {
+    max-height: 150px;
+    overflow: auto;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    border: 1px solid var(--border, #444);
 }
