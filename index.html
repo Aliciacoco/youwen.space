@@ -1,44 +1,1750 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="main.css">
-    <meta name="由闻之境" content="width=device-width, initial-scale=1.0">
+    <title>Coco's Home</title>
+    <link rel="icon" type="image/png" href="/assets/imgs/avatar-circle.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Futura', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: #f5f5f5;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 确保按钮和输入框继承字体 */
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+        header {
+            background: white;
+            padding: 24px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            border-bottom: rgba(0, 0, 0, 0.1) 0.5px solid;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 99px;
+            background: #f7f7f7;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            color: rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+        }
+
+        .nav-btn.active {
+            background: #000;
+            color: white;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: absolute;
+            right: 40px;
+            cursor: pointer;
+        }
+
+        .user-section:hover {
+            opacity: 0.7;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-image: url('/assets/imgs/avatar.jpg');
+            background-size: 100% 100%;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            display: flex;
+            max-width: none;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        /* ⭐ 关键修改1：固定侧边栏 */
+        .sidebar {
+            width: 240px;
+            min-width: 180px;
+            max-width: 400px;
+            flex-shrink: 0;
+            padding-right: 15px;
+            padding-top: 140px;
+            /* header 高度 + 间距 */
+            margin-left: max(40px, calc((100vw - 1400px) / 2));
+            transition: width 0.3s ease;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            /* 完全隐藏滚动条 */
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+        }
+
+        /* 隐藏 Webkit 滚动条 */
+        .sidebar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .sidebar.hidden {
+            display: none;
+        }
+
+        .sidebar-intro {
+            line-height: 1.8;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        /* 首字母加粗 */
+        .intro-title {
+            color: #808080; ;
+            font-weight: 600;
+        }
+
+        .sidebar-section {
+            margin-bottom: 20px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 10px 16px;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+            color: #808080;
+            white-space: nowrap;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .tag:hover {
+                background: #f8f8f8;
+            }
+        }
+
+        .tag.active {
+            background-color: #000;
+            color: white;
+            border-color: #000;
+        }
+
+        /* ⭐ 关键修改2：固定分隔条 */
+        .divider {
+            width: 100px;
+            position: sticky;
+            top: 0;
+            cursor: col-resize;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            user-select: none;
+            transition: all 0.3s ease;
+            height: 100vh;
+            flex-shrink: 0;
+            padding-top: 140px;
+        }
+
+        .divider.hidden {
+            display: none;
+        }
+
+        /* 细竖线 */
+        .divider::before {
+            content: '';
+            position: absolute;
+            width: 0.5px;
+            height: 100vh;
+            top: 0;
+            background: rgba(0, 0, 0, 0.1);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* 拖动把手 */
+        .divider::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 28px;
+            border: 0.5px solid rgba(0, 0, 0, 0.1);
+            background: #fff;
+            border-radius: 99px;
+            left: 50%;
+            top: 400px;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .divider:hover::after {
+            opacity: 1;
+        }
+
+        .divider.dragging::after {
+            opacity: 1;
+            background: #f0f0f0;
+        }
+
+        body.resizing {
+            cursor: col-resize;
+            user-select: none;
+        }
+
+        body.resizing * {
+            cursor: col-resize !important;
+        }
+
+        /* ⭐ 关键修改3：可滚动的内容区，滚动条在屏幕最右侧 */
+        .content {
+            flex: 1;
+            padding-left: 15px;
+            padding-top: 140px;
+            /* header 高度 + 间距 */
+            padding-bottom: 40px;
+            padding-right: max(40px, calc((100vw - 1400px) / 2 + 40px));
+            min-width: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* 美化内容区滚动条 */
+        .content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .content::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+        }
+
+        .content::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+        .content.full-width {
+            padding-left: max(40px, calc((100vw - 1400px) / 2 + 40px));
+            padding-right: max(40px, calc((100vw - 1400px) / 2 + 40px));
+        }
+
+        /* Favorites Page Styles */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px 30px;
+            padding-bottom: 40px;
+            align-items: start;
+            /* 顶部对齐 */
+        }
+
+        .card.card-large .card-image {
+            height: 450px;
+            max-width: 100%;
+        }
+
+        .card {
+            background: transparent;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .card:hover {
+                transform: translateY(-6px);
+            }
+        }
+
+        /* ⭐ 关键修改4：优化图片清晰度 */
+        .card-image {
+            width: 100%;
+            height: 160px;
+            border: 0.5px solid rgba(0, 0, 0, 0.1);
+            /* 再增加高度！*/
+            object-fit: cover;
+            object-position: top center;
+            /* 从顶部开始显示 */
+            border-radius: 10px;
+            /* 使用最佳质量渲染 */
+            image-rendering: high-quality;
+            image-rendering: -webkit-optimize-contrast;
+            /* 启用硬件加速 */
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            will-change: transform;
+            /* 抗锯齿 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            /* 防止模糊 */
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            perspective: 1000px;
+            /* 确保像素对齐 */
+            image-orientation: from-image;
+            /* 平滑过渡 */
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            /* 确保在 flex 容器中顶部对齐 */
+        }
+
+        /* 图片加载时的占位效果 */
+        .card-image[src] {
+            background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+        }
+
+        /* Code Lab 图片切换效果 */
+        .codelab-image {
+            transition: opacity 0.3s ease;
+        }
+
+        .codelab-card:hover .codelab-image {
+            opacity: 1;
+        }
+
+        .card-content {
+            padding: 15px 5px 0 5px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #4f4f4f;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1200px) {
+            .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 35px 25px;
+            }
+
+            .sidebar {
+                margin-left: 40px;
+            }
+
+            .content {
+                padding-right: 40px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                gap: 30px 20px;
+            }
+
+            .card-image {
+                height: 280px;
+            }
+
+            .sidebar {
+                margin-left: 30px;
+            }
+
+            .content {
+                padding-right: 30px;
+            }
+        }
+
+        /* 移动端响应式样式 - 修复版 */
+        /* 移动端响应式样式 - 最终修复版 */
+
+        @media (max-width: 600px ) {
+            /* ============ 1. 头部导航优化 ============ */
+            header {
+                padding: 16px 20px;
+                justify-content: space-between;
+                font-size: 14px;
+                z-index: 1000;
+            }
+
+            .user-section {
+                right: 20px;
+            }
+
+            .user-name {
+                display: none;
+            }
+
+            /* ============ 2. Body 和容器布局 ============ */
+            body {
+                padding-top: 0;
+                height: auto;
+                overflow-x: hidden;
+                overflow-y: auto;   
+            }
+
+            .container {
+                flex-direction: column;
+                height: auto;
+                position: static;
+            }
+
+            /* ============ 3. 侧边栏变为顶部内容 ============ */
+
+            .sidebar {
+                height: auto;
+                position: static;
+                padding: 74px 0px 0px 0px;
+                width: 100%;
+                max-width: 500px;
+                margin: 0;
+                
+            }
+            .sidebar-intro {
+                margin-bottom: 0;
+                padding: 30px 20px 0px 20px;
+            }
+
+            .sidebar-section {
+                position: static;
+                transition: all 0.2s ease;
+                margin-bottom: 0;
+                /* overflow-x: auto; */
+            }
+
+            .tags-container {
+                padding: 16px 10px 16px 20px;
+                overflow-x: auto;
+            }
+
+            /* 滚动后固定样式 */
+            .sidebar-section.fixed {
+                width: 100%;
+                position: fixed;
+                z-index: 999;
+                background-color: rgba(255, 255, 255, 0.6);
+                backdrop-filter: blur(10px); /* 添加模糊效果 */
+                top: 74px;
+                overflow-x: auto;
+                border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+            }
+
+
+            /* ============ 4. 标签横着排列 ============ */
+            .tags-container {
+                display: flex;
+                flex-wrap: nowrap; /* 横向排列，不换行 */
+                justify-content: left;
+                gap: 16px;
+                overflow-x: auto;  /* 横向可滚动 */
+                /* padding: 8px 0; */
+                -webkit-overflow-scrolling: touch; /* 让 iOS 滑动更流畅 */
+            }
+
+            .tags-container::-webkit-scrollbar {
+                display: none; /* 可选：隐藏滚动条 */
+            }
+
+            /* ============ 4. 移除分隔条 ============ */
+            .divider {
+                display: none;
+            }
+
+            /* ============ 5. 主内容区域适配 ============ */
+            .content {
+                width: 100%;
+                padding: 20px 20px 20px 20px;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+            /* ============ 6. 卡片网格适配 ============ */
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding-bottom: 20px;
+            }
+
+            .card-image {
+                height: 120px;
+            }
+
+            .card.card-large .card-image {
+                height: 320px;
+            }
+            
+            /* ============ 8. 模态框适配 ============ */
+            .modal-content {
+                width: 90%;
+                max-width: none;
+                padding: 40px 24px;
+                height: 80vh;
+            }
+            .profile-avatar {
+                width: 90px !important;
+                height: 90px !important;
+            }
+
+            .project-showcase>div {
+                flex-direction: column;
+                align-items: center;
+                
+            }
+            .project-image{
+                width: 90px !important; 
+                height: 90px !important; 
+            }
+
+            /* ============ 9. 其他移动端优化 ============ */
+            nav {
+                gap: 20px;
+            }
+
+            .nav-btn {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            .content.blog-page {
+                padding-top: 104px !important;  /* 👈 添加这个规则 */
+            }
+        
+        }
+
+        /* Blog Page Styles */
+        .blog-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px 40px 20px;
+        }
+
+        .blog-section {
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .blog-section-title {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+
+        .blog-item-content {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .blog-item-content:hover {
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Profile Modal */
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 0;  /* 改为 0，我们用内部容器控制 padding */
+            max-width: 90vh;
+            max-height: 90vh;
+            overflow: hidden;  /* 改为 hidden */
+            position: relative;
+            animation: slideUp 0.3s ease;
+            color: #4f4f4f;
+            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 固定的顶部区域（包含关闭按钮） */
+        .modal-header {
+            position: sticky;
+            top: 0;
+            right: 0;
+            height: 60px;  /* 顶部留出空间 */
+            background: white;
+            z-index: 10;
+            flex-shrink: 0;
+            border-radius: 20px 20px 0 0;  /* 保持顶部圆角 */
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 28px;
+            color: #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #333;
+            transform: rotate(90deg);
+        }
+
+        /* 可滚动的内容区域 */
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 40px 60px 40px;  /* 左右下有 padding，顶部不需要 */
+        }
+
+        /* 美化内容区滚动条 */
+        .modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.25);
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            overflow: hidden;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-intro {
+            text-align: center;
+            line-height: 2;
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 50px;
+        }
+
+        .profile-intro h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .profile-intro p {
+            margin: 0;
+        }
+
+        .project-showcase {
+            background: #f8f8f8;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .project-showcase:hover {
+            transform: translateY(-2px);
+            transition: all 0.3s;
+        }
+
+        .project-showcase-title {
+            font-size: 15px;
+            color: #4f4f4f;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .project-showcase-link {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            word-break: break-all;
+        }
+
+        .project-showcase-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+        .project-content{
+            display: flex; 
+            gap: 20px; 
+            align-items: flex-start;
+        }
+        .project-image{
+            width: 120px; 
+            height: 120px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            flex-shrink: 0;
+        }
+
+        .profile-footer {
+            text-align: center;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .download-resume {
+            color: #333;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: all 0.3s;
+        }
+
+        .download-resume:hover {
+            color: #666;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Verification Modal */
+        .verification-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .verification-modal.active {
+            display: flex;
+        }
+
+        .verification-content {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .verification-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 24px;
+            color: #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: all 0.3s;
+        }
+
+        .verification-close:hover {
+            color: #333;
+        }
+
+        .verification-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .verification-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .verification-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .verification-input:focus {
+            outline: none;
+            border-color: #000;
+        }
+
+        .verification-input.error {
+            border-color: #ff4444;
+        }
+
+        .verification-error {
+            color: #ff4444;
+            font-size: 13px;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .verification-error.show {
+            display: block;
+        }
+
+        .verification-btn {
+            width: 100%;
+            padding: 12px;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .verification-btn:hover {
+            background: #333;
+        }
+
+        .verification-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+
 </head>
+
 <body>
-    <nav>
-        <a href="/" class="nav-link" aria-current="page">由闻之境</a>
-        <a href="./pages/lab/index.html" class="nav-link">Lab</a>
-        <a href="./pages/Ref/index.html" class="nav-link">Ref</a>
-        <a href="./pages/blog/index.html" class="nav-link">Blog</a>
-    </nav>
-    <p class="text-2xs">If you can design one thing, you can design everything.</p>
-    <br><br>
-    <div>
-        <p>欢迎来到由闻之境，这里是我的主页。</p>
-        <p>成为<strong> Design Engineer</strong> 是我近期的目标，我会在这里记录学习的过程和资料。</p>
-        <p>交互实践请移步 Lab, 文章和杂谈在 Blog 中 。</p>
-        <p>希望对你有帮助！</p>
+    <header>
+        <nav>
+            <button class="nav-btn active" data-page="favorites">Favorites</button>
+            <button class="nav-btn" data-page="codelab">Code Lab</button>
+            <button class="nav-btn" data-page="blog">Blog</button>
+        </nav>
+        <div class="user-section" id="userSection">
+            <span class="user-name">Coco's Home</span>
+            <div class="user-avatar"></div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-intro" id="sidebarIntro">
+                <strong class="intro-title">Favorites</strong> → 中记录了我喜欢的网站或产品，它们在产品功能、交互或设计上独树一帜，让人使用起来心旷神怡,十分过瘾。<br>
+                以下是用作筛选的标签:
+            </div>
+
+            <div id="placeholder"></div> <!-- 👈 占位用 -->
+
+            <div class="sidebar-section" id="favoritesSection">
+                <div class="tags-container">
+                    <div class="tag" data-category="图片/PDF处理工具">图片/PDF处理工具</div>
+                    <div class="tag" data-category="音效/图片素材">音效/图片素材</div>
+                    <div class="tag" data-category="互动网页">互动网页</div>
+                    <div class="tag" data-category="游戏">游戏</div>
+                    <div class="tag" data-category="GSAP">GSAP 技术网站</div>
+                    <div class="tag" data-category="WebGL">WebGL 技术网站</div>
+                    <div class="tag" data-category="AI">AI工具</div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="divider" id="divider"></div>
+
+        <main class="content" id="mainContent">
+            <!-- Favorites Page -->
+            <div class="page active" id="favoritesPage">
+                <div class="cards-grid" id="cardsGrid"></div>
+            </div>
+
+            <!-- Code Lab Page -->
+            <div class="page" id="codelabPage">
+                <div class="cards-grid" id="codelabCardsGrid"></div>
+            </div>
+
+            <!-- Blog Page -->
+            <div class="page" id="blogPage">
+                <div class="blog-content">
+                    <div class="blog-section">
+                        <div class="blog-section-title">/ 技术相关 /</div>
+                        <div class="blog-item-content"
+                            onclick="openBlogPage('/pages/blog/2025-08-15_build_如何购买域名并部署Vercel.html')">
+                            如何购买域名并部署Vercel
+                        </div>
+                        <div class="blog-item-content"
+                            onclick="openBlogPage('/pages/blog/2025-08-16_build_技术词汇清单.html')">
+                            技术词汇清单
+                        </div>
+                    </div>
+
+                    <div class="blog-section">
+                        <div class="blog-section-title">/ 杂记 /</div>
+                        <div class="blog-item-content"
+                            onclick="openBlogPage('/pages/blog/2025-08-18_ideas_不超过6小时的深度专注时间.html')">
+                            不超过6小时的深度专注时间
+                        </div>
+                        <div class="blog-item-content"
+                            onclick="openBlogPage('/pages/blog/2025-08-27_ideas_效率、自我与自由.html')">
+                            效率、自我与自由
+                        </div>
+                        <div class="blog-item-content"
+                            onclick="openBlogPage('/pages/blog/2025-09-11_ideas_那些践行长期主义的公司.html')">
+                            那些践行长期主义的公司
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-    <br>
-    <div class="project-section">
-        <div class="budget-card">
-            <a href="https://www.todolist.youwen.space" target="_blank">
-                <img src="./assets/imgs/project-card/budget.png" alt="预算账本 Logo" class="logo" />
-            </a>
-            <h4>我的预算账本</h4>
-            <a href="https://www.todolist.youwen.space" class="budget-card-url" target="_blank">
-                https://www.todolist.youwen.space
-            </a>
-            <p class="desc">
-                这是一个基于“六个罐子”理念设计的简化版记账工具，使用 React 编写，部署于 GitHub + Vercel，后端使用 Supabase 数据库。<br><br>
-                当前处于第二阶段的优化中，计划实现预算与消费条目的解耦、多用户使用，以及 AI 分析功能。
-            </p>
+
+    <!-- Profile Modal -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal-content">
+            <!-- 固定的头部区域 -->
+            <div class="modal-header">
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+    
+            <!-- 可滚动的内容区域 -->
+            <div class="modal-body">
+                <div class="profile-avatar">
+                    <img src="/assets/imgs/avatar.jpg" alt="Coco">
+                </div>
+    
+                <div class="profile-intro">
+                    <p>欢迎来到我的个人主页</p>
+                    <p>我是 <strong class="intro-title">Coco</strong>，一个热爱设计、工程的产品经理。</p>
+                    <p>我喜欢搜集精致好用的产品，倾佩它们的开发者是如此的追求不凡。</p>
+                    <p>我也愈发喜欢技术，在奇思妙想的同时，考虑它们如何落地。</p>
+                    <p>我相信好的Idea+Design+Engineer，在时间的打磨下，可能诞生有价值的产品，</p>
+                    <p>我也在如此进行着我的实验。</p>
+                    <p>比如budget 预算管理工具，在优化完成后</p>
+                    <p>希望能尽快邀请更多人试用。</p>
+                </div>
+    
+                <div class="project-showcase" onclick="window.open('https://www.todolist.youwen.space/', '_blank')"
+                    style="cursor: pointer;">
+                    <div class="project-content">
+                        <img src="/assets/imgs/budget.png" alt="预算账本" class="project-image">
+                        <div>
+                            <div class="project-showcase-title">我的预算账本</div>
+                            <div class="project-showcase-link">https://www.todolist.youwen.space/</div>
+                            <div class="project-showcase-desc">
+                                这是一个基于"六个罐子"理念设计的简化版记账工具，使用 React 编写，部署于 GitHub + Vercel，后端使用 Supabase 数据库。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="profile-footer">
+                    想了解我更多？<span class="download-resume" id="downloadResume">下载详细简历</span>
+                </div>
+            </div>
         </div>
     </div>
-    
 
-    
+    <!-- Verification Modal -->
+    <div class="verification-modal" id="verificationModal">
+        <div class="verification-content">
+            <button class="verification-close" id="verificationClose">&times;</button>
+            <div class="verification-title">验证身份</div>
+            <div class="verification-subtitle">请输入我的姓名以下载简历</div>
+            <input type="text" class="verification-input" id="nameInput" placeholder="请输入我的姓名">
+            <div class="verification-error" id="verificationError">名字不正确，请重试</div>
+            <button class="verification-btn" id="verifyBtn">确认下载</button>
+        </div>
+    </div>
+
+    <script>
+        //Favorites Tab中的数据
+        const cardsData = [
+                {
+                    id: 1,
+                    title: 'Recompressor',
+                    desc: '在线图片压缩工具',
+                    category: '图片/PDF处理工具',
+                    image: '/assets/imgs/favorites/Recompressor.png',
+                    link: 'https://recompressor.com'
+                },
+                {
+                    id: 2,
+                    title: 'iLovePDF',
+                    desc: '在线PDF工具箱',
+                    category: '图片/PDF处理工具',
+                    image: '/assets/imgs/favorites/ilovepdf.png',
+                    link: 'https://www.ilovepdf.com'
+                },
+                {
+                    id: 3,
+                    title: 'Pixabay',
+                    desc: '免费音效/图片素材',
+                    category: '音效/图片素材',
+                    image: '/assets/imgs/favorites/pixabay.png',
+                    link: 'https://pixabay.com'
+                },
+                {
+                    id: 4,
+                    title: 'Pexels',
+                    desc: '免费图片素材',
+                    category: '音效/图片素材',
+                    image: '/assets/imgs/favorites/pexels.png',
+                    link: 'https://pexels.com'
+                },
+                {
+                    id: 5,
+                    title: 'Aconvert',
+                    desc: '音频格式在线转换',
+                    category: '音效/图片素材',
+                    image: '/assets/imgs/favorites/aconvert.png',
+                    link: 'https://www.aconvert.com/cn/audio/'
+                },
+                {
+                    id: 6,
+                    title: 'TopMediai',
+                    desc: 'AI文字转语音',
+                    category: 'AI',
+                    image: '/assets/imgs/favorites/topmediAI.png',
+                    link: 'https://www.topmediai.com'
+                },
+                {
+                    id: 7,
+                    title: 'darkstarfury',
+                    desc: 'Patrick Heintzmann 制作的在线街机射击游戏',
+                    category: '游戏',
+                    image: '/assets/imgs/favorites/darkstarfury.png',
+                    link: 'https://www.darkstarfury.com'
+                },
+                {
+                    id: 8,
+                    title: '《The Boat》',
+                    desc: '互动图像小说，讲述越南战后难民的故事',
+                    category: '互动网页',
+                    image: '/assets/imgs/favorites/the-boat.gif',
+                    link: 'https://www.sbs.com.au/theboat'
+                },
+                {
+                    id: 9,
+                    title: 'Dropbox × McLaren F1',
+                    desc: 'Dropbox 与 McLaren F1 团队合作的展示页面',
+                    category: '互动网页',
+                    image: '/assets/imgs/favorites/dropbox.png',
+                    link: 'https://dash.dropbox.com/mclarenf1'
+                },
+                {
+                    id: 10,
+                    title: 'Arcade Labs',
+                    desc: '位于洛杉矶的品牌设计工作室',
+                    category: '互动网页',
+                    image: '/assets/imgs/favorites/arcade-labs.png',
+                    link: 'https://www.arcadelabs.co/'
+                },
+                {
+                    id: 11,
+                    title: 'Dead Simple Sites',
+                    desc: 'Arcade Labs 策划的极简网站集合',
+                    category: '互动网页',
+                    image: '/assets/imgs/favorites/deadsimplesites.png',
+                    link: 'https://deadsimplesites.com/?ref=arcade'
+                },
+                {
+                    id: 12,
+                    title: 'Devouring Details',
+                    desc: '设计师 Rauno Freiberg 创建的互动参考手册',
+                    category: '互动网页',
+                    image: '/assets/imgs/favorites/devouringdetails.png',
+                    link: 'https://devouringdetails.com'
+                },
+                {
+                    id: 13,
+                    title: 'Emily Lonetto',
+                    desc: 'Arcade Labs 策划的极简网站集合产品与增长领域的个人作品集网站',
+                    category: '互动网页',
+                    image: '/assets/imgs/favorites/emilylonetto.png',
+                    link: 'https://emilylonetto.com'
+                },
+                {
+                    id: 14,
+                    title: 'Making Software',
+                    desc: '产品与增长领域的个人作品集网站',
+                    category: '互动网页',
+                    image: '/assets/imgs/favorites/makingsoftware.png',
+                    link: 'https://makingsoftware.com'
+                },
+                {
+                    id: 15,
+                    title: 'FC88',
+                    desc: '创意工作室的品牌与项目展示',
+                    category: '互动网页',
+                    image: '/assets/imgs/favorites/thisisfc88.png',
+                    link: 'https://thisisfc88.com'
+                },
+                {
+                    id: 16,
+                    title: 'GTA6 Landing Page',
+                    desc: 'Rockstar Games 为 GTA6 制作的互动宣传页面',
+                    category: 'GSAP',
+                    image: '/assets/imgs/favorites/gta.png',
+                    link: 'https://www.rockstargames.com/VI'
+                },
+                {
+                    id: 17,
+                    title: 'GSAP 官网',
+                    desc: '专业级 JavaScript 动画库',
+                    category: 'GSAP',
+                    image: '/assets/imgs/favorites/gasp.png',
+                    link: 'https://gsap.com/'
+                },
+                {
+                    id: 18,
+                    title: 'Apple AirPods',
+                    desc: '结合 GSAP 和精美视觉设计，实现流畅的滚动与过渡动画',
+                    category: 'GSAP',
+                    image: '/assets/imgs/favorites/apple.png',
+                    link: 'https://www.apple.com/airpods-pro/'
+                },
+                {
+                    id: 19,
+                    title: 'Active Theory',
+                    desc: '顶级互动工作室，为 Google I/O、NASA 等制作项目，广泛使用 GSAP',
+                    category: 'GSAP',
+                    image: '/assets/imgs/favorites/activetheory.png',
+                    link: 'https://activetheory.net/work'
+                },
+                {
+                    id: 20,
+                    title: 'Dogstudio',
+                    desc: '著名创意数字工作室，擅长融合 GSAP 动画与沉浸式体验',
+                    category: 'GSAP',
+                    image: '/assets/imgs/favorites/dogstudio.png',
+                    link: 'https://dogstudio.co/'
+                },
+                {
+                    id: 21,
+                    title: 'Bruno Simon 个人作品集',
+                    desc: '使用 WebGL + GSAP + ScrollTrigger 构建的“边玩边看的”3D 互动作品集',
+                    category: 'GSAP',
+                    image: '/assets/imgs/favorites/bruno-simon.gif',
+                    link: 'https://bruno-simon.com/'
+                },
+                {
+                    id: 22,
+                    title: 'Google Earth',
+                    desc: 'Google 提供的 3D 地球浏览器，完全基于 WebGL 渲染',
+                    category: 'WebGL',
+                    image: '/assets/imgs/favorites/earth.google.png',
+                    link: 'https://earth.google.com'
+                },
+                {
+                    id: 23,
+                    title: '彩虹鼠标拖尾',
+                    desc: '用 WebGL（OGL 库） 做的“彩虹鼠标拖尾”效果',
+                    category: 'WebGL',
+                    image: '/assets/imgs/favorites/Rainbow Mouse Animation Effect.gif',
+                    link: 'https://codepen.io/sijad/full/XJmZLgg?utm_source=extension&utm_medium=click&utm_campaign=muzli'
+                },
+                {
+                    id: 24,
+                    title: 'Three.js',
+                    desc: '基于 WebGL 的 JavaScript 3D 图形库官方示例',
+                    category: 'WebGL',
+                    image: '/assets/imgs/favorites/three-js.png',
+                    link: 'https://threejs.org/examples/#webgl_animation_keyframes'
+                },
+                {
+                    id: 25,
+                    title: '实时大规模流体模拟演示',
+                    desc: '社区用户使用 WebGPU 技术实现的实时大规模流体模拟',
+                    category: 'WebGL',
+                    image: '/assets/imgs/favorites/splash-fluid.png',
+                    link: 'https://splash-fluid.netlify.app/'
+                },
+                {
+                    id: 26,
+                    title: 'Kinder und Klinik',
+                    desc: '创意工作室的品牌与项目展示',
+                    category: '互动网页',
+                    image: '/assets/imgs/favorites/kinder-und-klinik.png',
+                    link: 'https://kinder-und-klinik.de'
+                }
+            ];
+
+        // Code Lab Tab中的数据
+        const codelabProjects = [
+            {
+                id: 1,
+                title: '拖拽移动',
+                subtitle: 'Drag to Move',
+                staticImage: '/assets/imgs/codelab/drag-to-move.png',
+                gifImage: '/assets/imgs/codelab/drag-to-move.gif',
+                link: '/pages/lab/drag-to-move.html'
+            },
+            {
+                id: 2,
+                title: '拖拽排序',
+                subtitle: 'Drag Sort',
+                staticImage: '/assets/imgs/codelab/drag-sort.png',
+                gifImage: '/assets/imgs/codelab/drag-sort.gif',
+                link: '/pages/lab/drag-sort.html'
+            },
+            {
+                id: 3,
+                title: '悬停放大',
+                subtitle: 'Hover Zoom',
+                staticImage: '/assets/imgs/codelab/hover-zoom.png',
+                gifImage: '/assets/imgs/codelab/hover-zoom.gif',
+                link: '/pages/lab/hover-zoom.html'
+            },
+            {
+                id: 4,
+                title: '视差滚动',
+                subtitle: 'Parallax Scrolling',
+                staticImage: '/assets/imgs/codelab/parallax-scrolling.png',
+                gifImage: '/assets/imgs/codelab/parallax-scrolling.gif',
+                link: '/pages/lab/parallax-scrolling.html'
+            },
+            {
+                id: 5,
+                title: '滚动翻页',
+                subtitle: 'Wheel Pager',
+                staticImage: '/assets/imgs/codelab/wheel-pager.png',
+                gifImage: '/assets/imgs/codelab/wheel-pager.gif',
+                link: '/pages/lab/wheel-pager.html'
+            },
+            {
+                id: 6,
+                title: '滚动显现',
+                subtitle: 'Scroll Reveal',
+                staticImage: '/assets/imgs/codelab/scroll-reveal.png',
+                gifImage: '/assets/imgs/codelab/scroll-reveal.gif',
+                link: '/pages/lab/scroll-reveal.html'
+            }
+        ];
+
+        // Sidebar 固定逻辑
+        window.addEventListener('DOMContentLoaded', () => {
+                const sidebarIntro = document.getElementById('sidebarIntro');
+                const sidebarSection = document.getElementById('favoritesSection');
+                const placeholder = document.getElementById('placeholder'); // 👈 新加的占位元素
+
+                const navHeight = 74;
+
+                window.addEventListener('scroll', () => {
+                    //如果 .sidebarIntro 的底部已经滚动到导航栏顶部或以上 → 固定
+                    const introBottom = sidebarIntro.getBoundingClientRect().bottom;
+                    if (introBottom <= navHeight) {
+                        // ⭐ 当固定时，设置占位器高度为 sidebarSection 的高度
+                        placeholder.style.height = `${sidebarSection.offsetHeight}px`;
+                        console.log(placeholder.style.height);
+                        sidebarSection.classList.add('fixed');
+                    } else {
+                        // ⭐ 取消固定时，恢复
+                        placeholder.style.height = '0';
+                        sidebarSection.classList.remove('fixed');
+                    }
+                });
+            });
+
+            // Sidebar 渐隐效果
+            const sidebarIntro = document.querySelector('.sidebar-intro');
+                let ticking = false;
+
+                function updateOpacity() {
+                    const scrollY = window.scrollY;
+                    const fadeDistance = 300;
+                    const opacity = Math.max(0, 1 - (scrollY / fadeDistance));
+
+                    sidebarIntro.style.opacity = opacity;
+                    ticking = false;
+                }
+
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(updateOpacity);
+                        ticking = true;
+                    }
+                });
+
+        
+
+        let selectedCategories = [];
+        let currentPage = 'favorites';
+
+        function openProjectPage(url) {
+            window.open(url, '_blank');
+        }
+
+        function openBlogPage(url) {
+            window.location.href = url;
+        }
+
+        // Render Favorites Cards
+        function renderCards() {
+            const grid = document.getElementById('cardsGrid');
+            let filteredCards = cardsData;
+
+            if (selectedCategories.length > 0) {
+                filteredCards = cardsData.filter(card => selectedCategories.includes(card.category));
+            }
+
+            if (filteredCards.length === 0) {
+                grid.innerHTML = '<div class="no-results">没有找到相关内容</div>';
+                return;
+            }
+
+            grid.innerHTML = filteredCards.map(card => `
+                <div class="card" onclick="window.open('${card.link}', '_blank')">
+                    <img src="${card.image}" alt="${card.title}" class="card-image">
+                    <div class="card-content">
+                        <div class="card-title">${card.title}</div>
+                        <div class="card-desc">${card.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Code Lab Cards
+        function renderCodelabCards() {
+            const grid = document.getElementById('codelabCardsGrid');
+            grid.innerHTML = codelabProjects.map(project => `
+                <div class="card codelab-card" onclick="openProjectPage('${project.link}')">
+                    <img src="${project.staticImage}" 
+                         data-static="${project.staticImage}" 
+                         data-gif="${project.gifImage}" 
+                         alt="${project.title}" 
+                         class="card-image codelab-image">
+                    <div class="card-content">
+                        <div class="card-title">${project.title}</div>
+                        <div class="card-desc">${project.subtitle}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            // 添加鼠标悬停事件
+            const codelabCards = document.querySelectorAll('.codelab-card');
+
+            // 检测是否为触摸设备
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+            if (!isTouchDevice) {
+                codelabCards.forEach(card => {
+                    const img = card.querySelector('.codelab-image');
+                    const staticSrc = img.dataset.static;
+                    const gifSrc = img.dataset.gif;
+
+                    // 鼠标进入时切换到 GIF
+                    card.addEventListener('mouseenter', function () {
+                        img.src = gifSrc;
+                    });
+
+                    // 鼠标离开时切换回静态图
+                    card.addEventListener('mouseleave', function () {
+                        img.src = staticSrc;
+                    });
+                });
+            }
+        }
+
+        // Tag Filter
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function () {
+                const category = this.dataset.category;
+
+                if (!category) return;
+
+                this.classList.toggle('active');
+
+                if (selectedCategories.includes(category)) {
+                    selectedCategories = selectedCategories.filter(c => c !== category);
+                } else {
+                    selectedCategories.push(category);
+                }
+
+                renderCards();
+
+                // 如果标签栏已经固定，滚动到刚好固定的位置
+                const favoritesSection = document.getElementById('favoritesSection');
+                if (favoritesSection.classList.contains('fixed')) {
+                    const isMobile = window.innerWidth <= 768;
+                    const headerHeight = 74;
+
+                    // 计算标签栏的原始位置
+                    const sidebarIntro = document.getElementById('sidebarIntro');
+                    const sidebarPaddingTop = 140; // sidebar的padding-top
+                    const introHeight = sidebarIntro.offsetHeight;
+                    const introMarginBottom = 25; // intro的margin-bottom
+                    const tagsHeight = favoritesSection.offsetHeight; // 标签栏自身的高度
+
+                    // 标签栏底部的原始位置 = sidebar padding + intro高度 + intro margin + 标签栏高度
+                    const tagsBottomPosition = sidebarPaddingTop + introHeight + 10;
+
+                    // 目标滚动位置 = 标签栏底部位置 - header高度 - 标签栏高度
+                    const targetScroll = tagsBottomPosition - headerHeight - tagsHeight;
+
+                    setTimeout(() => {
+                        if (isMobile) {
+                            window.scrollTo({ top: targetScroll, behavior: 'auto' });
+                        } else {
+                            document.getElementById('mainContent').scrollTo({ top: targetScroll, behavior: 'smooth' });
+                        }
+                    }, 50);
+                }
+                
+            });
+        });
+
+        // Resizable Divider functionality
+        const divider = document.getElementById('divider');
+        const sidebar = document.getElementById('sidebar');
+        let isResizing = false;
+        let startX = 0;
+        let startWidth = 0;
+
+        divider.addEventListener('mousedown', function (e) {
+            isResizing = true;
+            startX = e.clientX;
+            startWidth = sidebar.offsetWidth;
+            divider.classList.add('dragging');
+            document.body.classList.add('resizing');
+            // 禁用transition以提高流畅度
+            sidebar.style.transition = 'none';
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', function (e) {
+            if (!isResizing) return;
+
+            const diff = e.clientX - startX;
+            let newWidth = startWidth + diff;
+
+            // 限制最小和最大宽度
+            const minWidth = 180;
+            const maxWidth = 400;
+            newWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
+
+            sidebar.style.width = newWidth + 'px';
+        });
+
+        document.addEventListener('mouseup', function () {
+            if (isResizing) {
+                isResizing = false;
+                divider.classList.remove('dragging');
+                document.body.classList.remove('resizing');
+                // 恢复transition
+                sidebar.style.transition = '';
+            }
+        });
+
+
+        // Switch to specific page
+        function switchToPage(page) {
+            // 👇 重置所有可能的滚动位置
+            document.getElementById('mainContent').scrollTop = 0;  // 桌面端的滚动容器
+            window.scrollTo(0, 0);  // 移动端的窗口滚动
+            document.documentElement.scrollTop = 0;  // 兼容性处理
+            document.body.scrollTop = 0;  // 兼容性处理
+
+            // 👇 移除固定标签的 class
+            const sidebarSection = document.getElementById('favoritesSection');
+            if (sidebarSection) {
+                sidebarSection.classList.remove('fixed');
+            }
+
+            // Update active nav button
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.nav-btn[data-page="${page}"]`).classList.add('active');
+
+            // Update active page
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(page + 'Page').classList.add('active');
+
+            // Update sidebar content and visibility
+            const sidebarIntro = document.getElementById('sidebarIntro');
+            const favoritesSection = document.getElementById('favoritesSection');
+            const mainContent = document.getElementById('mainContent');
+
+            if (page === 'favorites') {
+                sidebarIntro.innerHTML = `<strong class="intro-title">Favorites</strong> → 中记录了我喜欢的网站或产品，它们在产品功能、交互或设计上独树一帜，让人使用起来心旷神怡，十分过瘾。<br>以下是用作筛选的标签:`;
+                favoritesSection.style.display = 'block';
+                sidebar.classList.remove('hidden');
+                divider.classList.remove('hidden');
+                mainContent.classList.remove('full-width');
+                sidebarIntro.style.marginBottom = ''; // 👈 添加这行，恢复默认
+                mainContent.classList.remove('blog-page');
+            } else if (page === 'codelab') {
+                sidebarIntro.innerHTML = `<strong class="intro-title">Code Lab</strong> → 记录了一些通过Html、Css、Javascript进行的交互实验，简单的语言也能做出惊艳的效果。`;
+                favoritesSection.style.display = 'none';
+                sidebar.classList.remove('hidden');
+                divider.classList.remove('hidden');
+                mainContent.classList.remove('full-width');
+                sidebarIntro.style.marginBottom = '20px'; // 👈 添加这行，设置你想要的距离
+                mainContent.classList.remove('blog-page');
+            } else if (page === 'blog') {
+                // Hide sidebar and divider for blog page
+                sidebar.classList.add('hidden');
+                divider.classList.add('hidden');
+                mainContent.classList.add('full-width');
+                mainContent.classList.add('blog-page');
+            }
+
+            currentPage = page;
+            // Save current page to localStorage
+            localStorage.setItem('currentPage', page);
+        }
+
+        // Page Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const page = this.dataset.page;
+                switchToPage(page);
+            });
+        });
+
+        // Profile Modal
+        const userSection = document.getElementById('userSection');
+        const profileModal = document.getElementById('profileModal');
+        const modalClose = document.getElementById('modalClose');
+
+        userSection.addEventListener('click', function () {
+            profileModal.classList.add('active');
+        });
+
+        modalClose.addEventListener('click', function () {
+            profileModal.classList.remove('active');
+        });
+
+        profileModal.addEventListener('click', function (e) {
+            if (e.target === profileModal) {
+                profileModal.classList.remove('active');
+            }
+        });
+
+        // Verification Modal
+        const downloadResume = document.getElementById('downloadResume');
+        const verificationModal = document.getElementById('verificationModal');
+        const verificationClose = document.getElementById('verificationClose');
+        const nameInput = document.getElementById('nameInput');
+        const verifyBtn = document.getElementById('verifyBtn');
+        const verificationError = document.getElementById('verificationError');
+
+        // 设置正确的名字（您可以修改这个值）
+        const correctName = '张珂欣';
+        // 设置PDF文件路径（请替换为您的实际PDF文件路径）
+        const resumePdfPath = '/assets/pdf/resume.pdf';
+
+        downloadResume.addEventListener('click', function () {
+            verificationModal.classList.add('active');
+            nameInput.value = '';
+            nameInput.classList.remove('error');
+            verificationError.classList.remove('show');
+        });
+
+        verificationClose.addEventListener('click', function () {
+            verificationModal.classList.remove('active');
+        });
+
+        verificationModal.addEventListener('click', function (e) {
+            if (e.target === verificationModal) {
+                verificationModal.classList.remove('active');
+            }
+        });
+
+        // 处理验证和下载
+        verifyBtn.addEventListener('click', function () {
+            const inputValue = nameInput.value.trim();
+
+            if (inputValue === correctName) {
+                // 验证成功，下载PDF
+                verificationModal.classList.remove('active');
+
+                // 创建下载链接
+                const link = document.createElement('a');
+                link.href = resumePdfPath;
+                link.download = 'Coco_Resume.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // 可选：显示成功提示
+                alert('验证成功！正在下载简历...');
+            } else {
+                // 验证失败，显示错误
+                nameInput.classList.add('error');
+                verificationError.classList.add('show');
+            }
+        });
+
+        // 输入时清除错误状态
+        nameInput.addEventListener('input', function () {
+            nameInput.classList.remove('error');
+            verificationError.classList.remove('show');
+        });
+
+        // 支持回车键提交
+        nameInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                verifyBtn.click();
+            }
+        });
+
+        // Initialize
+        renderCards();
+        renderCodelabCards();
+
+
+        // Restore last visited page from localStorage
+        const savedPage = localStorage.getItem('currentPage');
+        if (savedPage && ['favorites', 'codelab', 'blog'].includes(savedPage)) {
+            switchToPage(savedPage);
+        }
+
+        
+        
+    </script>
+    </script>
+</body>
+
 </html>

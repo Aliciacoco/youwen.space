@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>真实雨滴效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #1a1a1a;
+            min-height: 300vh;
+            overflow-x: hidden;
+            color: #fff;
+        }
+
+        #rainCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 100px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 5em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            letter-spacing: 0.05em;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            font-style: italic;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin: 150px 0;
+            padding: 80px 60px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+
+        p {
+            font-size: 1.3em;
+            line-height: 2;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="rainCanvas"></canvas>
+
+    <div class="content">
+        <div class="hero">
+            <h1>THE RAIN</h1>
+            <p class="subtitle">向下滚动，感受暴风雨</p>
+        </div>
+
+        <div class="section">
+            <h2>暴风雨来临</h2>
+            <p>当你滚动鼠标时，雨滴会从天空倾泻而下。每一滴雨都有着真实的物理轨迹，斜着划过黑暗的夜空。</p>
+        </div>
+
+        <div class="section">
+            <h2>静谧时刻</h2>
+            <p>停止滚动，雨水渐渐停歇。这是一个关于动与静的故事，关于自然力量的诗篇。</p>
+        </div>
+
+        <div class="section">
+            <h2>继续旅程</h2>
+            <p>继续向下滚动，让暴风雨再次降临。感受这个沉浸式的视觉体验。</p>
+        </div>
+
+        <div class="section">
+            <h2>旅程的终点</h2>
+            <p>每一次滚动都是一场新的冒险。雨水洗涤着屏幕，带来全新的视觉体验。</p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('rainCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        class Raindrop {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = -20 - Math.random() * 100;
+                this.length = Math.random() * 20 + 15;
+                this.speed = Math.random() * 3 + 4;
+                this.opacity = Math.random() * 0.3 + 0.5;
+                this.angle = Math.PI / 8;
+                this.thickness = Math.random() * 1 + 0.5;
+            }
+
+            update() {
+                this.y += this.speed;
+                this.x += Math.cos(this.angle) * this.speed;
+
+                if (this.y > canvas.height + 50) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = this.thickness;
+                ctx.lineCap = 'round';
+
+                const gradient = ctx.createLinearGradient(
+                    this.x, this.y,
+                    this.x + Math.cos(this.angle) * this.length,
+                    this.y + this.length
+                );
+                gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+                gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+                ctx.strokeStyle = gradient;
+
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(
+                    this.x + Math.cos(this.angle) * this.length,
+                    this.y + this.length
+                );
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        let raindrops = [];
+        let isScrolling = false;
+        let scrollTimeout;
+        let animationId;
+        let targetRaindrops = 0;
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 渐入渐出效果
+            const currentCount = raindrops.length;
+            if (currentCount < targetRaindrops) {
+                const toAdd = Math.min(5, targetRaindrops - currentCount);
+                for (let i = 0; i < toAdd; i++) {
+                    raindrops.push(new Raindrop());
+                }
+            } else if (currentCount > targetRaindrops) {
+                raindrops.splice(0, Math.min(10, currentCount - targetRaindrops));
+            }
+
+            raindrops.forEach(drop => {
+                drop.update();
+                drop.draw();
+            });
+
+            animationId = requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        let lastScrollTime = 0;
+
+        window.addEventListener('scroll', () => {
+            const now = Date.now();
+
+            if (!isScrolling) {
+                isScrolling = true;
+                targetRaindrops = 200;
+            }
+
+            lastScrollTime = now;
+            clearTimeout(scrollTimeout);
+
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+                targetRaindrops = 0;
+            }, 150);
+        });
+    </script>
+</body>
+
+</html>

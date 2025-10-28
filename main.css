@@ -4,175 +4,76 @@
 @import url("css/lab-card.css");
 @import url("css/drag-to-move.css");
 @import url("css/drag-sort.css");
-@import url("css/ref.css");
-@import url("css/hover-zoom.css");
+@import url("css/ref.css");@import url("css/hover-zoom.css");
 @import url("css/learning-language.css");
 @import url("css/parallax-scrolling.css");
 @import url("css/wheel-pager.css");
 @import url("css/scroll-reveal.css");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+
 :root {
-    --bg: #fafafa; /*#FAF9F6*/
-    --bg-card: #f5f5f5;
-    --bg-dark:#212121;
-    --theme:#42A5F5;
-    --text: #424242;/*#333333*/
-    --border: #e0e0e0; 
-    --theme-color: #212121; /*#B55B39*/
-    --theme-hover: #000000; /*#8C3A22*/
-    --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-            Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --bg-dark:rgba(49, 49, 49);
+    --theme: rgba(250, 207, 113);
+    --theme2: rgba(250, 175, 95);
+    --theme3: rgba(250, 151, 104);
+    --theme4: rgba(248, 112, 96);
+    --purple: #9B51E0;
 }
 
-strong {
-    font-weight: 500;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    margin: 80px;
-    font-family: var(--font-sans);
-    line-height: 1.6;
-}
-@media (max-width: 600px) {
-    body {
-        margin: 30px;
-        /* 手机端的 margin 变小 */
-    }
-    pre,
-    pre code {
-        white-space: pre-wrap;
-        /* 保留缩进/换行，同时允许自动换行 */
-        overflow-wrap: anywhere;
-        /* 很长的单词/连续字符也能断开 */
-        word-break: break-word;
-        /* 兼容性兜底 */
-    }
-    .one-unit {
-        height: 3rem;
-        width: 4rem;
-    }
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    background: #f5f5f5;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
-
-
-html,
-body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'TsangerJinKai', sans-serif;
+/* 确保按钮和输入框继承字体 */
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
 }
 
-
-
-/* 字体 */
-h1,h2 {
-    font-weight: 600;
+.child-body {
+    padding: 40px;
+    background: #fafafa;
+    max-width: 1800px;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
 }
 
-h3,h4 {
-    font-weight: 500;
+.child-body h1, h2, h3, h4{
+    color: #4f4f4f;
+    margin-bottom: 20px;
+    
 }
-p,span {
-    font-weight: 300;
-}
-
-/* 去掉原点 */
-li {
-    list-style-type: none;
-}
-
-/* 分割线 */
-hr {
-    border: none;
-    border-top: 1px solid var(--border) 
-}
-
-nav{
-    display: flex;
-    gap: 30px;
-}
-
-.nav-link{
-    font-size: 30px;
-    font-weight: 400;
-}
-
-.nav-link[aria-current="page"] {
-    color: var(--theme-hover);
-    font-weight: 700;
-}
-
-a:link,
-a:visited {
-    color: var(--theme-color);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-a:hover {
-    color: var(--theme-hover);
-}
-
-/* 取消blog-list中a标签的样式 */
-.blog-list{
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-.blog-list a{
-    color: #333333;
+.child-body a {
     display: block;
-}
-.blog-list a:hover {
-    color: #111;
-}
-.text-2xs{
-    font-size: 12px;
-}
-.link {
-  color: var(--color-link, #0066cc);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.18s ease;
-}
-
-/* 项目卡片样式 */
-.budget-card {
-    width: 350px;
-    text-align: center;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-}
-
-.budget-card h4{
-    margin-bottom: 5px;
-}
-.logo {
-    width: 120px;
-    height: 120px;
-    border-radius: 20px;
-}
-
-
-.budget-card-url {
-    font-size: 12px;
-    color:red;
+    color: var(--theme);
+    color: var(--purple);
     text-decoration: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.desc {
-    font-size: 14px;
-    margin-top: 20px;
-    line-height: 1.6;
+.child-body p {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.8;
 }
 
-/* Monaco编辑器样式 */
-.editor-box {
-    max-height: 150px;
-    overflow: auto;
-    margin-bottom: 24px;
-    border-radius: 8px;
-    border: 1px solid var(--border, #444);
+hr{
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 10px 0;
 }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技术词汇清单</title>
+    <link rel="stylesheet" href="../../main.css">
+    <!-- Prism.js 样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.min.css">
+
+    <!-- Prism.js 核心库 -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
+    <!-- 额外语言支持（比如 C、JavaScript、HTML 等） -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-c.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markup.min.js"></script>
+
+</head>
+
+<body class="child-body">
+    <h1>技术词汇清单</h1>
+    <hr>
+
+    <!-- Deploy -->
+    <section>
+        <h2>部署（Deploy）</h2>
+        <p>将本地或测试环境的代码发布到线上平台，使其成为可访问的服务。</p>
+    </section>
+
+    <!-- Meta -->
+    <section>
+        <h2>元数据（Meta）</h2>
+        <p>“Meta”源自希腊语前缀，意味着“超越”或“关于……的”。</p>
+        <p>在 HTML 中，meta 标签用于描述页面的额外信息。</p>
+        <p>例如：<code>&lt;meta name="viewport" ...&gt;</code> → 描述网页在不同设备上如何显示。</p>
+    </section>
+
+    <!-- POST -->
+    <section>
+        <h2>POST 请求</h2>
+        <p>POST 请求是将数据发送到服务器的方式之一。</p>
+        <p>它是 HTTP 协议中的一种方法（Method），通常用于创建或提交数据。</p>
+    </section>
+
+    <!-- JSON -->
+    <section>
+        <h2>JSON</h2>
+        <p>JSON（JavaScript 对象表示法）是一种常用的数据交换格式，广泛用于不同系统间传递数据。</p>
+        <p>通常，API 返回的数据就是 JSON 格式，它用来描述资源的详细信息。</p>
+        <pre><code class="language-json">
+{
+"id": 1,
+"name": "Coco",
+"email": "coco@example.com",
+"isAdmin": false,
+"createdAt": "2025-08-15T10:00:00Z",
+"skills": ["HTML", "CSS", "JavaScript"],
+"profile": {
+    "avatar": "https://example.com/avatar.png",
+    "bio": "一名前端爱好者，喜欢用代码创造有趣的东西。"
+}
+}
+        </code></pre>
+    </section>
+
+    <!-- Pointer -->
+    <section>
+        <h2>指针（Pointer）</h2>
+        <p>指针是用来存储变量内存地址的变量。</p>
+        <p>printf是C语言的格式化字符串，%d指输出带符号的十进制整数，\n是添加的换行符。</p>
+        <pre><code class="language-c">int main() {
+    int a = 10;   // 一个普通变量
+    int *p;       // 一个指针变量（用来存地址）
+
+    p = &a;       // 把 a 的地址存到 p 里
+
+    printf("%d\n", a);   // 直接输出 a 的值：10
+    printf("%d\n", *p);  // 通过指针输出 a 的值：10
+
+    return 0;
+}</code></pre>
+    </section>
+
+    <script src="../../main.js" type="module"></script>
+</body>
+
+</html>

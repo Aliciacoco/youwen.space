@@ -5,27 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../main.css">
+    
 
 </head>
-<body data-feature="drag-to-move">
+<body class="child-body" data-feature="drag-to-move">
     <h1>拖拽移动 Drag to move</h1>
-    <p>要点<br>
+    <p>要点：<br>
         1. 记录鼠标按下时的位置，并实时跟踪鼠标位置，计算偏移量。<br>
         2. 元素的新位置 = 元素初始位置 + 鼠标偏移量。<br>
         3. 为避免移动过快导致拖动区域失去监听，应将事件监听绑定在 body 或全局。
     </p>
     <!-- 展示的可拖动内容 -->
     <div class="content">
-        <!-- <div class="bg">
-            <img src="../../assets/imgs/2025-08-19_library_Drag to Move/flying.gif" class="moving-img">
-        </div> -->
-<div class="container">
-    <div class="moveBar">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-    </div>
-</div>
+        <div class="container">
+            <div class="moveBar">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
     </div>
     <!-- 上方标签区 -->
     <div role="tablist">

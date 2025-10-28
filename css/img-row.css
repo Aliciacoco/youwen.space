@@ -1,3 +1,5 @@
+
+
 /* 缩略图容器（横排 + 自动换行） */
 .img-row {
     display: flex;
@@ -7,7 +9,8 @@
 }
 
 .img-row img {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: auto;
     border-radius: 8px;
     cursor: zoom-in;

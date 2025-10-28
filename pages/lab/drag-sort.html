@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../main.css">
+    <link rel="stylesheet" href="/css/drag-sort.css">
 </head>
 
-<body data-feature="drag-sort">
+<body class="child-body" data-feature="drag-sort">
     <h1>拖拽排序 Drag Sort</h1>
     <p>要点<br>
         1. 分步骤实现：拖拽移动目标 → 拖动中重排其他元素 → 松手后让被拖元素归位。<br>
@@ -17,23 +18,23 @@
     </p>
     <div class="content">
         <!-- 主体内容 -->
-<div class="drag-sort-container">
-    <div class="one-unit">
-        <span class="label">A</span>
-    </div>
-    <div class="one-unit">
-        <span class="label">B</span>
-    </div>
-    <div class="one-unit">
-        <span class="label">C</span>
-    </div>
-    <div class="one-unit">
-        <span class="label">D</span>
-    </div>
-    <div class="one-unit">
-        <span class="label">E</span>
-    </div>
-</div>
+        <div class="drag-sort-container">
+            <div class="one-unit">
+                <span class="label">A</span>
+            </div>
+            <div class="one-unit">
+                <span class="label">B</span>
+            </div>
+            <div class="one-unit">
+                <span class="label">C</span>
+            </div>
+            <div class="one-unit">
+                <span class="label">D</span>
+            </div>
+            <div class="one-unit">
+                <span class="label">E</span>
+            </div>
+        </div>
     </div>
     <!-- 上方标签区 -->
     <div role="tablist">

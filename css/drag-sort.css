@@ -1,7 +1,6 @@
 .drag-sort-container {
     display: flex;
     gap: 1rem;
-
 }
 
 .label {
@@ -11,7 +10,7 @@
 }
 
 .one-unit {
-    height: 5rem;
+    height: 10rem;
     width: 6rem;
     border-radius: 100rem;
     display: flex;
@@ -30,3 +29,14 @@
 .is-dragging {
     background-color: var(--theme);
 }
+
+ @media (max-width: 600px) {
+    .drag-sort-container {
+        display: flex;
+        gap: 0.8rem;
+    }
+    .one-unit {
+        height: 7rem;
+        width: 4.5rem;
+    }
+ }
