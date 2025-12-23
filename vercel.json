@@ -1,12 +1,9 @@
 {
   "headers": [
     {
-      "source": "/(.*)\\.(?:png|jpg|jpeg|svg|webp|gif|webm|mp4)$",
+      "source": "/assets/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, must-revalidate"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
       ]
     }
   ]
