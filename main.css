@@ -45,9 +45,10 @@ select {
 }
 
 .child-body {
-    padding: 40px;
+    padding: 80px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
     background: #fafafa;
-    max-width: 1800px;
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
 }
 

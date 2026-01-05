@@ -6,6 +6,14 @@
 const cardsData = [
     // 我的作品 - 置顶
     {
+        id: 0,
+        title: 'CloudPool',
+        desc: '重塑消费习惯的周预算工具',
+        category: '我的作品',
+        image: '/assets/imgs/cloudpool-cover.svg',
+        link: 'https://cloudpool.youwen.space/#home'
+    },
+    {
         id: 1,
         title: 'Recompressor',
         desc: '在线图片压缩工具',

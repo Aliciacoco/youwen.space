@@ -536,6 +536,15 @@ body.resizing * {
     padding: 0 40px 60px 40px;
 }
 
+/* --- 新增：手机端适配 --- */
+/* 当屏幕宽度小于 768px 时（通常是手机） */
+@media (max-width: 768px) {
+    .modal-body {
+        /* 将左右 padding 改为 20px，底部改为 30px 或 40px */
+        padding: 0 10px 40px 10px;
+    }
+}
+
 .modal-body::-webkit-scrollbar {
     width: 8px;
 }
