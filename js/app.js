@@ -109,17 +109,25 @@ function setupVideoCards() {
 }
 
 // 渲染 Code Lab 卡片
+// 渲染 Code Lab 卡片
 function renderCodelabCards() {
     const grid = document.getElementById('codelabCardsGrid');
+    const hasHover = window.matchMedia('(hover: hover)').matches;
+    
     grid.innerHTML = codelabProjects.map(project => `
         <div class="card codelab-card" onclick="openProjectPage('${project.link}')">
-            <video src="${project.gifImage}" 
-                poster="${project.staticImage}"
-                loop muted playsinline
-                loading="lazy"
-                preload="none"
-                class="card-image codelab-image">
-            </video>
+            ${hasHover ? 
+                `<video src="${project.gifImage}" 
+                    poster="${project.staticImage}"
+                    loop muted playsinline
+                    loading="lazy"
+                    preload="none"
+                    class="card-image codelab-image">
+                </video>` :
+                `<img src="${project.staticImage}" 
+                    alt="${project.title}" 
+                    class="card-image codelab-image">`
+            }
             <div class="card-content">
                 <div class="card-title">${project.title}</div>
                 <div class="card-desc">${project.subtitle}</div>
@@ -128,7 +136,6 @@ function renderCodelabCards() {
     `).join('');
 
     // 鼠标悬停播放视频（仅桌面端）
-    const hasHover = window.matchMedia('(hover: hover)').matches;
     if (hasHover) {
         const codelabCards = document.querySelectorAll('.codelab-card');
         codelabCards.forEach(card => {

@@ -303,6 +303,20 @@ body.resizing * {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    /* 👇 新增这一行：禁用手机浏览器默认的灰色点击背景，用我们自定义的效果代替 */
+        -webkit-tap-highlight-color: transparent;
+}
+/* ============ 新增：卡片点击/按压反馈 ============ */
+.card:active {
+    /* 1. 缩放效果：稍微缩小一点，模拟被按下去的感觉 */
+    transform: scale(0.96) !important;
+
+    /* 2. 透明度：稍微变暗/变透，强化视觉反馈 */
+    opacity: 0.85;
+
+    /* 3. 过渡时间：设为 0.1s 甚至更短，让反馈非常灵敏 */
+    transition: all 0.1s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
