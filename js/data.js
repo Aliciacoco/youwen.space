@@ -284,5 +284,5 @@ const codelabProjects = [
 // 简历验证配置
 const CONFIG = {
     correctName: '张珂欣',
-    resumePdfPath: '/assets/pdf/简历_张珂欣_17794505545.pdf'
+    resumePdfPath: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/%E7%AE%80%E5%8E%86_%E5%BC%A0%E7%8F%82%E6%AC%A3_17794505545.pdf'
 };
