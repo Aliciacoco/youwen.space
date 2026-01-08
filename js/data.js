@@ -7,7 +7,7 @@ const cardsData = [
     // 我的作品 - 置顶
     {
         id: 0,
-        title: 'CloudPool',
+        title: 'CloudPool【即将内测】',
         desc: '重塑消费习惯的周预算工具',
         category: '我的作品',
         image: '/assets/imgs/cloudpool-cover.svg',
@@ -281,5 +281,5 @@ const codelabProjects = [
 // 简历验证配置
 const CONFIG = {
     correctName: '张珂欣',
-    resumePdfPath: '/assets/pdf/resume.pdf'
+    resumePdfPath: '/assets/pdf/简历_张珂欣_17794505545.pdf'
 };
