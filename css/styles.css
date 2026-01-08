@@ -165,6 +165,13 @@ nav {
     font-size: 12px;
     color: #808080;
     white-space: nowrap;
+    /* 添加以下三行 */
+    -webkit-tap-highlight-color: transparent;
+    /* 禁用点击高亮 */
+    -webkit-touch-callout: none;
+    /* 禁用长按菜单 */
+    user-select: none;
+    /* 禁止选中文字 */
 }
 
 @media (hover: hover) and (pointer: fine) {
