@@ -964,7 +964,7 @@ body.resizing * {
     .modal-content {
         width: 90%;
         max-width: none;
-        padding: 40px 24px;
+        padding: 20px 24px;
         height: 80vh;
     }
 
