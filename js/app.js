@@ -5,6 +5,7 @@
 // ============ 全局状态 ============
 let selectedCategories = [];
 let currentPage = 'favorites';
+let minFixedScroll = 0;  // 保存让标签栏刚好固定的最小滚动距离
 
 // ============ 工具函数 ============
 function openProjectPage(url) {
@@ -17,6 +18,8 @@ function openBlogPage(url) {
 
 // ============ 渲染函数 ============
 
+// 渲染 Favorites 卡片
+// 渲染 Favorites 卡片
 // 渲染 Favorites 卡片
 function renderCards() {
     const grid = document.getElementById('cardsGrid');
@@ -31,14 +34,21 @@ function renderCards() {
         return;
     }
 
-    grid.innerHTML = filteredCards.map(card => `
+    grid.innerHTML = filteredCards.map((card, index) => `
         <div class="card ${card.isMyProject ? 'my-project' : ''}" onclick="window.open('${card.link}', '_blank')">
             ${card.isMyProject ? '<div class="card-badge">🛠️ 我开发的</div>' : ''}
             ${card.imageType === 'video' ?
-                `<video autoplay loop muted playsinline loading="lazy" preload="metadata" class="card-image">
-                    <source src="${card.image}" type="video/webm">
+                `<video 
+                    poster="${card.poster || ''}"
+                    loop muted playsinline
+                    preload="none"
+                    class="card-image"
+                    data-src="${card.image}">
                 </video>` :
-                `<img src="${card.image}" alt="${card.title}" loading="lazy" class="card-image">`
+                `<img 
+                    ${index < 6 ? `src="${card.image}"` : `data-src="${card.image}"`}
+                    alt="${card.title}" 
+                    class="card-image ${index >= 6 ? 'lazy' : ''}">`
             }
             <div class="card-content">
                 <div class="card-title">${card.title}</div>
@@ -46,6 +56,56 @@ function renderCards() {
             </div>
         </div>
     `).join('');
+
+    // 设置懒加载
+    setupLazyLoad();
+    setupVideoCards();
+}
+
+// 图片懒加载
+function setupLazyLoad() {
+    const lazyImages = document.querySelectorAll('img.lazy[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+            }
+        });
+    }, {
+        rootMargin: '100px'
+    });
+
+    lazyImages.forEach(img => imageObserver.observe(img));
+}
+
+// 视频懒加载 + 自动播放
+function setupVideoCards() {
+    const videoCards = document.querySelectorAll('.card video[data-src]');
+
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target;
+            
+            if (entry.isIntersecting) {
+                if (!video.src && video.dataset.src) {
+                    video.src = video.dataset.src;
+                    video.load();
+                }
+                video.play().catch(() => {});
+            } else {
+                video.pause();
+            }
+        });
+    }, {
+        rootMargin: '50px',
+        threshold: 0.1
+    });
+
+    videoCards.forEach(video => videoObserver.observe(video));
 }
 
 // 渲染 Code Lab 卡片
@@ -157,12 +217,17 @@ function initApp() {
 window.addEventListener('DOMContentLoaded', () => {
     initApp();
 
-    // ===== Sidebar 固定逻辑 =====
+    // ===== 计算移动端最小固定滚动距离 =====
     const sidebarIntro = document.getElementById('sidebarIntro');
     const sidebarSection = document.getElementById('favoritesSection');
     const placeholder = document.getElementById('placeholder');
     const navHeight = 74;
 
+    // 页面加载时计算让标签栏刚好固定的滚动距离
+    const introRect = sidebarIntro.getBoundingClientRect();
+    minFixedScroll = introRect.bottom - navHeight + 1;
+
+    // ===== Sidebar 固定逻辑 =====
     window.addEventListener('scroll', () => {
         const introBottom = sidebarIntro.getBoundingClientRect().bottom;
         if (introBottom <= navHeight) {
@@ -205,26 +270,24 @@ window.addEventListener('DOMContentLoaded', () => {
                 selectedCategories.push(category);
             }
 
+            const favoritesSection = document.getElementById('favoritesSection');
+            const sidebarIntro = document.getElementById('sidebarIntro');
+            const isMobile = window.innerWidth <= 600;
+            const wasFixed = favoritesSection.classList.contains('fixed');
+            const navHeight = 74;
+
+            // 在渲染前计算 sidebarIntro 底部距离文档顶部的绝对距离
+            const introBottomFromDoc = sidebarIntro.getBoundingClientRect().bottom + window.scrollY;
+            const targetScroll = introBottomFromDoc - navHeight + 1;
+
+            // 渲染卡片
             renderCards();
 
-            // 滚动到合适位置
-            const favoritesSection = document.getElementById('favoritesSection');
-            if (favoritesSection.classList.contains('fixed')) {
-                const isMobile = window.innerWidth <= 768;
-                const headerHeight = 74;
-                const introHeight = sidebarIntro.offsetHeight;
-                const sidebarPaddingTop = 140;
-                const tagsHeight = favoritesSection.offsetHeight;
-                const tagsBottomPosition = sidebarPaddingTop + introHeight + 10;
-                const targetScroll = tagsBottomPosition - headerHeight - tagsHeight;
-
-                setTimeout(() => {
-                    if (isMobile) {
-                        window.scrollTo({ top: targetScroll, behavior: 'auto' });
-                    } else {
-                        document.getElementById('mainContent').scrollTo({ top: targetScroll, behavior: 'smooth' });
-                    }
-                }, 50);
+            // 移动端：如果标签栏之前是固定的，滚动到固定位置
+            if (isMobile && wasFixed) {
+                requestAnimationFrame(() => {
+                    window.scrollTo(0, targetScroll);
+                });
             }
         });
     });

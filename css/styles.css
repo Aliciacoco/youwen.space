@@ -363,6 +363,27 @@ body.resizing * {
     line-height: 1.6;
 }
 
+/* 图片懒加载样式 */
+.card-image.lazy {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-image.lazy[src] {
+    opacity: 1;
+}
+
+/* 图片加载中的占位背景 */
+.card-image {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+/* 图片加载完成后移除背景 */
+.card-image[src]:not(.lazy) {
+    background: none;
+}
+
 /* 我的作品标签 */
 .card-badge {
     position: absolute;

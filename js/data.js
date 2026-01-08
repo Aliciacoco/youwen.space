@@ -75,6 +75,7 @@ const cardsData = [
         desc: '互动图像小说，讲述越南战后难民的故事',
         category: '互动网页',
         image: '/assets/imgs/favorites/the-boat.webm',
+        poster: '/assets/imgs/favorites/the-boat.webp',  // 添加静态图
         imageType: 'video',
         link: 'https://www.sbs.com.au/theboat'
     },
@@ -180,6 +181,7 @@ const cardsData = [
         desc: '使用 WebGL + GSAP + ScrollTrigger 构建的"边玩边看的"3D 互动作品集',
         category: 'GSAP',
         image: '/assets/imgs/favorites/bruno-simon.webm',
+        poster: '/assets/imgs/favorites/bruno-simon.webp',  // 添加静态图
         imageType: 'video',
         link: 'https://bruno-simon.com/'
     },
@@ -197,6 +199,7 @@ const cardsData = [
         desc: '用 WebGL（OGL 库） 做的"彩虹鼠标拖尾"效果',
         category: 'WebGL',
         image: '/assets/imgs/favorites/Rainbow Mouse Animation Effect.webm',
+        poster: '/assets/imgs/favorites/Rainbow Mouse Animation Effect.webp',  // 添加静态图
         imageType: 'video',
         link: 'https://codepen.io/sijad/full/XJmZLgg?utm_source=extension&utm_medium=click&utm_campaign=muzli'
     },
