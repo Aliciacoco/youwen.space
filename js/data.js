@@ -56,7 +56,7 @@ const cardsData = [
     {
         id: 6,
         title: 'TopMediai',
-        desc: 'AI文字转语音',
+        desc: 'AI文字转语音【翻墙】',
         category: 'AI',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/topmediAI.webp',
         link: 'https://www.topmediai.com'
@@ -72,7 +72,7 @@ const cardsData = [
     {
         id: 8,
         title: '《The Boat》',
-        desc: '互动图像小说，讲述越南战后难民的故事',
+        desc: '互动图像小说，讲述越南战后难民的故事【翻墙】',
         category: '互动网页',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/the-boat.webm',
         poster: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/the-boat.webp',  // 添加静态图
@@ -82,7 +82,7 @@ const cardsData = [
     {
         id: 9,
         title: 'Dropbox × McLaren F1',
-        desc: 'Dropbox 与 McLaren F1 团队合作的展示页面',
+        desc: 'Dropbox 与 McLaren F1 团队合作的展示页面【翻墙】',
         category: '互动网页',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/dropbox.webp',
         link: 'https://dash.dropbox.com/mclarenf1'
@@ -90,7 +90,7 @@ const cardsData = [
     {
         id: 10,
         title: 'Arcade Labs',
-        desc: '位于洛杉矶的品牌设计工作室',
+        desc: '位于洛杉矶的品牌设计工作室【翻墙】',
         category: '互动网页',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/arcade-labs.webp',
         link: 'https://www.arcadelabs.co/'
@@ -106,7 +106,7 @@ const cardsData = [
     {
         id: 12,
         title: 'Devouring Details',
-        desc: '设计师 Rauno Freiberg 创建的互动参考手册',
+        desc: '设计师 Rauno Freiberg 创建的互动参考手册【翻墙】',
         category: '互动网页',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/devouringdetails.webp',
         link: 'https://devouringdetails.com'
@@ -114,7 +114,7 @@ const cardsData = [
     {
         id: 13,
         title: 'Emily Lonetto',
-        desc: 'Arcade Labs 策划的极简网站集合产品与增长领域的个人作品集网站',
+        desc: 'Arcade Labs 策划的极简网站集合产品与增长领域的个人作品集网站【翻墙】',
         category: '互动网页',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/emilylonetto.webp',
         link: 'https://emilylonetto.com'
@@ -122,7 +122,7 @@ const cardsData = [
     {
         id: 14,
         title: 'Making Software',
-        desc: '产品与增长领域的个人作品集网站',
+        desc: '产品与增长领域的个人作品集网站【翻墙】',
         category: '互动网页',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/makingsoftware.webp',
         link: 'https://makingsoftware.com'
@@ -170,7 +170,7 @@ const cardsData = [
     {
         id: 20,
         title: 'Dogstudio',
-        desc: '著名创意数字工作室，擅长融合 GSAP 动画与沉浸式体验',
+        desc: '著名创意数字工作室，擅长融合 GSAP 动画与沉浸式体验【翻墙】',
         category: 'GSAP',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/dogstudio.webp',
         link: 'https://dogstudio.co/'
@@ -178,7 +178,7 @@ const cardsData = [
     {
         id: 21,
         title: 'Bruno Simon 个人作品集',
-        desc: '使用 WebGL + GSAP + ScrollTrigger 构建的"边玩边看的"3D 互动作品集',
+        desc: '使用 WebGL + GSAP + ScrollTrigger 构建的"边玩边看的"3D 互动作品集【翻墙】',
         category: 'GSAP',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/bruno-simon.webm',
         poster: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/bruno-simon.webp',  // 添加静态图
@@ -188,7 +188,7 @@ const cardsData = [
     {
         id: 22,
         title: 'Google Earth',
-        desc: 'Google 提供的 3D 地球浏览器，完全基于 WebGL 渲染',
+        desc: 'Google 提供的 3D 地球浏览器，完全基于 WebGL 渲染【翻墙】',
         category: 'WebGL',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/earth.google.webp',
         link: 'https://earth.google.com'
@@ -196,7 +196,7 @@ const cardsData = [
     {
         id: 23,
         title: '彩虹鼠标拖尾',
-        desc: '用 WebGL（OGL 库） 做的"彩虹鼠标拖尾"效果',
+        desc: '用 WebGL（OGL 库） 做的"彩虹鼠标拖尾"效果【翻墙】',
         category: 'WebGL',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/Rainbow Mouse Animation Effect.webm',
         poster: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/Rainbow Mouse Animation Effect.webp',  // 添加静态图
@@ -214,7 +214,7 @@ const cardsData = [
     {
         id: 25,
         title: '实时大规模流体模拟演示',
-        desc: '社区用户使用 WebGPU 技术实现的实时大规模流体模拟',
+        desc: '社区用户使用 WebGPU 技术实现的实时大规模流体模拟【翻墙】',
         category: 'WebGL',
         image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/splash-fluid.webp',
         link: 'https://splash-fluid.netlify.app/'
@@ -235,48 +235,48 @@ const codelabProjects = [
         id: 1,
         title: '拖拽移动',
         subtitle: 'Drag to Move',
-        staticImage: '/assets/imgs/codelab/drag-to-move.webp',
-        gifImage: '/assets/imgs/codelab/drag-to-move.webm',
+        staticImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/drag-to-move.webp',
+        gifImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/drag-to-move.webm',
         link: '/pages/lab/drag-to-move.html'
     },
     {
         id: 2,
         title: '拖拽排序',
         subtitle: 'Drag Sort',
-        staticImage: '/assets/imgs/codelab/drag-sort.webp',
-        gifImage: '/assets/imgs/codelab/drag-sort.webm',
+        staticImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/drag-sort.webp',
+        gifImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/drag-sort.webm',
         link: '/pages/lab/drag-sort.html'
     },
     {
         id: 3,
         title: '悬停放大',
         subtitle: 'Hover Zoom',
-        staticImage: '/assets/imgs/codelab/hover-zoom.webp',
-        gifImage: '/assets/imgs/codelab/hover-zoom.webm',
+        staticImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/hover-zoom.webp',
+        gifImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/hover-zoom.webm',
         link: '/pages/lab/hover-zoom.html'
     },
     {
         id: 4,
         title: '视差滚动',
         subtitle: 'Parallax Scrolling',
-        staticImage: '/assets/imgs/codelab/parallax-scrolling.webp',
-        gifImage: '/assets/imgs/codelab/parallax-scrolling.webm',
+        staticImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/parallax-scrolling.webp',
+        gifImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/parallax-scrolling.webm',
         link: '/pages/lab/parallax-scrolling.html'
     },
     {
         id: 5,
         title: '滚动翻页',
         subtitle: 'Wheel Pager',
-        staticImage: '/assets/imgs/codelab/wheel-pager.webp',
-        gifImage: '/assets/imgs/codelab/wheel-pager.webm',
+        staticImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/wheel-pager.webp',
+        gifImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/wheel-pager.webm',
         link: '/pages/lab/wheel-pager.html'
     },
     {
         id: 6,
         title: '滚动显现',
         subtitle: 'Scroll Reveal',
-        staticImage: '/assets/imgs/codelab/scroll-reveal.webp',
-        gifImage: '/assets/imgs/codelab/scroll-reveal.webm',
+        staticImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/scroll-reveal.webp',
+        gifImage: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/scroll-reveal.webm',
         link: '/pages/lab/scroll-reveal.html'
     }
 ];
