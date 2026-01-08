@@ -10,7 +10,7 @@ const cardsData = [
         title: 'CloudPool【即将内测】',
         desc: '重塑消费习惯的周预算工具',
         category: '我的作品',
-        image: '/assets/imgs/cloudpool-cover.svg',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/cloudpool-cover.svg',
         link: 'https://cloudpool.youwen.space/#home'
     },
     {
@@ -18,7 +18,7 @@ const cardsData = [
         title: 'Recompressor',
         desc: '在线图片压缩工具',
         category: '图片/PDF处理工具',
-        image: '/assets/imgs/favorites/Recompressor.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/Recompressor.webp',
         link: 'https://recompressor.com'
     },
     {
@@ -26,7 +26,7 @@ const cardsData = [
         title: 'iLovePDF',
         desc: '在线PDF工具箱',
         category: '图片/PDF处理工具',
-        image: '/assets/imgs/favorites/ilovepdf.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/ilovepdf.webp',
         link: 'https://www.ilovepdf.com'
     },
     {
@@ -34,7 +34,7 @@ const cardsData = [
         title: 'Pixabay',
         desc: '免费音效/图片素材',
         category: '音效/图片素材',
-        image: '/assets/imgs/favorites/pixabay.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/pixabay.webp',
         link: 'https://pixabay.com'
     },
     {
@@ -42,7 +42,7 @@ const cardsData = [
         title: 'Pexels',
         desc: '免费图片素材',
         category: '音效/图片素材',
-        image: '/assets/imgs/favorites/pexels.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/pexels.webp',
         link: 'https://pexels.com'
     },
     {
@@ -50,7 +50,7 @@ const cardsData = [
         title: 'Aconvert',
         desc: '音频格式在线转换',
         category: '音效/图片素材',
-        image: '/assets/imgs/favorites/aconvert.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/aconvert.webp',
         link: 'https://www.aconvert.com/cn/audio/'
     },
     {
@@ -58,7 +58,7 @@ const cardsData = [
         title: 'TopMediai',
         desc: 'AI文字转语音',
         category: 'AI',
-        image: '/assets/imgs/favorites/topmediAI.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/topmediAI.webp',
         link: 'https://www.topmediai.com'
     },
     {
@@ -66,7 +66,7 @@ const cardsData = [
         title: 'darkstarfury',
         desc: 'Patrick Heintzmann 制作的在线街机射击游戏',
         category: '游戏',
-        image: '/assets/imgs/favorites/darkstarfury.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/darkstarfury.webp',
         link: 'https://www.darkstarfury.com'
     },
     {
@@ -74,8 +74,8 @@ const cardsData = [
         title: '《The Boat》',
         desc: '互动图像小说，讲述越南战后难民的故事',
         category: '互动网页',
-        image: '/assets/imgs/favorites/the-boat.webm',
-        poster: '/assets/imgs/favorites/the-boat.webp',  // 添加静态图
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/the-boat.webm',
+        poster: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/the-boat.webp',  // 添加静态图
         imageType: 'video',
         link: 'https://www.sbs.com.au/theboat'
     },
@@ -84,7 +84,7 @@ const cardsData = [
         title: 'Dropbox × McLaren F1',
         desc: 'Dropbox 与 McLaren F1 团队合作的展示页面',
         category: '互动网页',
-        image: '/assets/imgs/favorites/dropbox.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/dropbox.webp',
         link: 'https://dash.dropbox.com/mclarenf1'
     },
     {
@@ -92,7 +92,7 @@ const cardsData = [
         title: 'Arcade Labs',
         desc: '位于洛杉矶的品牌设计工作室',
         category: '互动网页',
-        image: '/assets/imgs/favorites/arcade-labs.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/arcade-labs.webp',
         link: 'https://www.arcadelabs.co/'
     },
     {
@@ -100,7 +100,7 @@ const cardsData = [
         title: 'Dead Simple Sites',
         desc: 'Arcade Labs 策划的极简网站集合',
         category: '互动网页',
-        image: '/assets/imgs/favorites/deadsimplesites.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/deadsimplesites.webp',
         link: 'https://deadsimplesites.com/?ref=arcade'
     },
     {
@@ -108,7 +108,7 @@ const cardsData = [
         title: 'Devouring Details',
         desc: '设计师 Rauno Freiberg 创建的互动参考手册',
         category: '互动网页',
-        image: '/assets/imgs/favorites/devouringdetails.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/devouringdetails.webp',
         link: 'https://devouringdetails.com'
     },
     {
@@ -116,7 +116,7 @@ const cardsData = [
         title: 'Emily Lonetto',
         desc: 'Arcade Labs 策划的极简网站集合产品与增长领域的个人作品集网站',
         category: '互动网页',
-        image: '/assets/imgs/favorites/emilylonetto.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/emilylonetto.webp',
         link: 'https://emilylonetto.com'
     },
     {
@@ -124,7 +124,7 @@ const cardsData = [
         title: 'Making Software',
         desc: '产品与增长领域的个人作品集网站',
         category: '互动网页',
-        image: '/assets/imgs/favorites/makingsoftware.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/makingsoftware.webp',
         link: 'https://makingsoftware.com'
     },
     {
@@ -132,7 +132,7 @@ const cardsData = [
         title: 'FC88',
         desc: '创意工作室的品牌与项目展示',
         category: '互动网页',
-        image: '/assets/imgs/favorites/thisisfc88.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/thisisfc88.webp',
         link: 'https://thisisfc88.com'
     },
     {
@@ -140,7 +140,7 @@ const cardsData = [
         title: 'GTA6 Landing Page',
         desc: 'Rockstar Games 为 GTA6 制作的互动宣传页面',
         category: 'GSAP',
-        image: '/assets/imgs/favorites/gta.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/gta.webp',
         link: 'https://www.rockstargames.com/VI'
     },
     {
@@ -148,7 +148,7 @@ const cardsData = [
         title: 'GSAP 官网',
         desc: '专业级 JavaScript 动画库',
         category: 'GSAP',
-        image: '/assets/imgs/favorites/gasp.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/gasp.webp',
         link: 'https://gsap.com/'
     },
     {
@@ -156,7 +156,7 @@ const cardsData = [
         title: 'Apple AirPods',
         desc: '结合 GSAP 和精美视觉设计，实现流畅的滚动与过渡动画',
         category: 'GSAP',
-        image: '/assets/imgs/favorites/apple.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/apple.webp',
         link: 'https://www.apple.com/airpods-pro/'
     },
     {
@@ -164,7 +164,7 @@ const cardsData = [
         title: 'Active Theory',
         desc: '顶级互动工作室，为 Google I/O、NASA 等制作项目，广泛使用 GSAP',
         category: 'GSAP',
-        image: '/assets/imgs/favorites/activetheory.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/activetheory.webp',
         link: 'https://activetheory.net/work'
     },
     {
@@ -172,7 +172,7 @@ const cardsData = [
         title: 'Dogstudio',
         desc: '著名创意数字工作室，擅长融合 GSAP 动画与沉浸式体验',
         category: 'GSAP',
-        image: '/assets/imgs/favorites/dogstudio.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/dogstudio.webp',
         link: 'https://dogstudio.co/'
     },
     {
@@ -180,8 +180,8 @@ const cardsData = [
         title: 'Bruno Simon 个人作品集',
         desc: '使用 WebGL + GSAP + ScrollTrigger 构建的"边玩边看的"3D 互动作品集',
         category: 'GSAP',
-        image: '/assets/imgs/favorites/bruno-simon.webm',
-        poster: '/assets/imgs/favorites/bruno-simon.webp',  // 添加静态图
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/bruno-simon.webm',
+        poster: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/bruno-simon.webp',  // 添加静态图
         imageType: 'video',
         link: 'https://bruno-simon.com/'
     },
@@ -190,7 +190,7 @@ const cardsData = [
         title: 'Google Earth',
         desc: 'Google 提供的 3D 地球浏览器，完全基于 WebGL 渲染',
         category: 'WebGL',
-        image: '/assets/imgs/favorites/earth.google.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/earth.google.webp',
         link: 'https://earth.google.com'
     },
     {
@@ -198,8 +198,8 @@ const cardsData = [
         title: '彩虹鼠标拖尾',
         desc: '用 WebGL（OGL 库） 做的"彩虹鼠标拖尾"效果',
         category: 'WebGL',
-        image: '/assets/imgs/favorites/Rainbow Mouse Animation Effect.webm',
-        poster: '/assets/imgs/favorites/Rainbow Mouse Animation Effect.webp',  // 添加静态图
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/Rainbow Mouse Animation Effect.webm',
+        poster: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/Rainbow Mouse Animation Effect.webp',  // 添加静态图
         imageType: 'video',
         link: 'https://codepen.io/sijad/full/XJmZLgg?utm_source=extension&utm_medium=click&utm_campaign=muzli'
     },
@@ -208,7 +208,7 @@ const cardsData = [
         title: 'Three.js',
         desc: '基于 WebGL 的 JavaScript 3D 图形库官方示例',
         category: 'WebGL',
-        image: '/assets/imgs/favorites/three-js.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/three-js.webp',
         link: 'https://threejs.org/examples/#webgl_animation_keyframes'
     },
     {
@@ -216,7 +216,7 @@ const cardsData = [
         title: '实时大规模流体模拟演示',
         desc: '社区用户使用 WebGPU 技术实现的实时大规模流体模拟',
         category: 'WebGL',
-        image: '/assets/imgs/favorites/splash-fluid.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/splash-fluid.webp',
         link: 'https://splash-fluid.netlify.app/'
     },
     {
@@ -224,7 +224,7 @@ const cardsData = [
         title: 'Kinder und Klinik',
         desc: '创意工作室的品牌与项目展示',
         category: '互动网页',
-        image: '/assets/imgs/favorites/kinder-und-klinik.webp',
+        image: 'https://youwencoco.oss-cn-shanghai.aliyuncs.com/kinder-und-klinik.webp',
         link: 'https://kinder-und-klinik.de'
     }
 ];
